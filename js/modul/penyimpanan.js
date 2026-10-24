@@ -191,9 +191,6 @@ function initStorage() {
     state.masterSarpras = getDefaultMasterSarpras();
     localStorage.setItem("garatika_master_sarpras", JSON.stringify(state.masterSarpras));
   }
-  if (typeof syncMasterSarprasFromServer === 'function') {
-    syncMasterSarprasFromServer();
-  }
 
   const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwzQt8PY-MK6qP_nOOH1dkAygilR6RXI73foev8cdEfbPoQBINnPykrAZgQTsuqRmig/exec";
   state.gasWebhookUrl = DEFAULT_GAS_URL;
@@ -462,13 +459,6 @@ function saveMasterSarprasItems(items) {
     localStorage.setItem("garatika_master_sarpras", JSON.stringify(normalized));
     if (typeof state !== 'undefined') state.masterSarpras = [...normalized];
 
-    // Sinkronisasi real-time ke Live Server (untuk semua laptop & HP di jaringan)
-    fetch('/api/master-sarpras', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(normalized)
-    }).catch(() => {});
-
     // Sinkronisasi ke Cloud Google Apps Script
     if (typeof syncChangeToGAS === 'function') {
       syncChangeToGAS('saveMasterSarpras', { items: normalized });
@@ -476,20 +466,6 @@ function saveMasterSarprasItems(items) {
   } catch (e) {
     console.error("Gagal simpan master sarpras:", e);
   }
-}
-
-async function syncMasterSarprasFromServer() {
-  try {
-    const res = await fetch('/api/master-sarpras', { cache: 'no-store' });
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
-        const normalized = normalizeMasterSarprasList(data);
-        if (typeof state !== 'undefined') state.masterSarpras = normalized;
-        localStorage.setItem("garatika_master_sarpras", JSON.stringify(normalized));
-      }
-    }
-  } catch (e) {}
 }
 
 function syncCurrentSarprasToMaster() {
