@@ -1,0 +1,29 @@
+/**
+ * =========================================================================
+ * SISTEM INFORMASI & LAPORAN PASKIBRA GARATIKA SMKN 40 JAKARTA
+ * Lembar Gaya Utama (Main Stylesheet Aggregator)
+ * =========================================================================
+ * Seluruh kode CSS telah dipecah secara rapi & terorganisir ke dalam
+ * folder 'css/modul/' dengan nama file berbahasa Indonesia:
+ *
+ * 1. variabel_dan_dasar.css            -> Variabel warna, tipografi, reset
+ * 2. halaman_login.css                 -> Tampilan login & inline warning alert
+ * 3. tata_letak_aplikasi.css           -> Header, sidebar drawer, app layout, footer
+ * 4. komponen_ui.css                   -> Tombol, badge status, modal, SweetAlert
+ * 5. dashboard_dan_pimpinan.css        -> Kartu metrik, struktur pimpinan & pelatih
+ * 6. tabel_dan_divisi.css              -> Grid divisi, tabel anggota & pengurus
+ * 7. form_laporan.css                  -> Form 5 divisi, tabel kas, absensi, filter
+ * 8. kop_surat_dan_cetak.css           -> Kop dinas resmi Garatika, cetak PDF
+ * 9. integrasi_drive_dan_database.css  -> Banner cloud, tabs switcher arsip & drive
+ * =========================================================================
+ */
+
+@import url("modul/variabel_dan_dasar.css");
+@import url("modul/halaman_login.css");
+@import url("modul/tata_letak_aplikasi.css");
+@import url("modul/komponen_ui.css");
+@import url("modul/dashboard_dan_pimpinan.css");
+@import url("modul/tabel_dan_divisi.css");
+@import url("modul/form_laporan.css");
+@import url("modul/kop_surat_dan_cetak.css");
+@import url("modul/integrasi_drive_dan_database.css");

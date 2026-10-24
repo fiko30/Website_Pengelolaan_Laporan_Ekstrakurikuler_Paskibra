@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paskibra Garatika - SMK Negeri 40 Jakarta</title>
+
+  <!-- PWA & Mobile Meta Tags (Progressive Web App) -->
+  <meta name="theme-color" content="#dc2626">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Paskibra Garatika">
+  <meta name="application-name" content="Paskibra Garatika">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="icons/icon-96.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  
+  <!-- Font Google: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet (Clean Standard Web) -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Flatpickr CSS (Kalender Modern Paskibra - Khusus Hari Selasa & Mode Bulanan Sarpras) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="css/flatpickr-monthSelect.css">
+  
+  <!-- Stylesheet Responsif Multi-Layar (HP, Tablet, Desktop, Ultra-Wide) -->
+  <link rel="stylesheet" href="css/responsif.css">
+
+  <style>
+    .swal2-container {
+      z-index: 99999 !important;
+    }
+  </style>
+</head>
+<body class="user-not-logged-in">
+
+  <!-- ==========================================================================
+       HEADER UTAMA (STICKY DI BAGIAN TERATAS)
+       KIRI: LOGO SMKN 40, KANAN: LOGO PASKIBRA GARATIKA
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Tombol Hamburger Sidebar (Hanya Muncul Saat Berhasil Login di HP/Tablet) -->
+      <button id="btnToggleSidebar" class="btn-sidebar-toggle" aria-label="Buka Menu Sidebar" title="Buka Menu Sidebar" style="display: none !important;">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Pojok Kiri: Logo SMKN 40 Jakarta -->
+      <div class="header-logo-box">
+        <img src="logo-smk40.png" alt="Logo SMKN 40 Jakarta" class="logo-img" onerror="this.src='https://via.placeholder.com/48/b91c1c/ffffff?text=SMK40'">
+      </div>
+
+      <!-- Bagian Tengah: Identitas Sekolah & Ekstrakurikuler -->
+      <div class="header-center-info">
+        <h1 class="header-title">
+          Paskibra SMK Negeri 40 Jakarta
+        </h1>
+      </div>
+
+      <!-- Pojok Kanan: Logo Paskibra Garatika -->
+      <div class="header-logo-box">
+        <img src="logo-paskibra.png" alt="Logo Paskibra Garatika" class="logo-img" onerror="this.src='https://via.placeholder.com/48/0f172a/ffffff?text=Garatika'">
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       LAYAR 1: HALAMAN AUTH / LOGIN
+       ========================================================================== -->
+  <div id="authScreen" class="auth-wrapper active">
+    <!-- Hiasan Ambient Latar Belakang -->
+    <div class="auth-bg-circle auth-bg-circle-1"></div>
+    <div class="auth-bg-circle auth-bg-circle-2"></div>
+
+    <div class="auth-card">
+      <!-- Pita Aksen Dekoratif Atas Card -->
+      <div class="auth-card-ribbon"></div>
+
+      <div class="auth-header">
+        <!-- Hiasan Emblem Ikon Lingkaran User Profile -->
+        <div class="auth-emblem">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <!-- Hiasan Garis Pembatas Bintang (Tepat setelah Icon Profile) -->
+        <div class="auth-title-divider">
+          <span class="divider-line"></span>
+          <i class="fa-solid fa-star divider-icon"></i>
+          <span class="divider-line"></span>
+        </div>
+
+        <h2 class="auth-title">Masuk</h2>
+
+        <p class="auth-subtitle">
+          Masuk untuk Mengelola Data Laporan Ekstrakurikuler Paskibra SMK Negeri 40 Jakarta
+        </p>
+      </div>
+
+      <!-- Form Login -->
+      <form id="formLogin">
+        
+        <!-- Peringatan Kecil di Atas Kolom Input -->
+        <div id="loginAlertBox" class="login-inline-alert" style="display: none;" role="alert">
+          <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+          <span id="loginAlertMsg">Peringatan</span>
+        </div>
+
+        <!-- Input Nama Lengkap -->
+        <div class="form-group">
+          <label for="loginNama">
+            Nama Lengkap <span class="req">*</span>
+          </label>
+          <div class="input-icon-group">
+            <i class="fa-regular fa-user input-icon-lead"></i>
+            <input 
+              type="text" 
+              id="loginNama" 
+              class="form-control-with-icon" 
+              placeholder="Masukkan Nama Lengkap" 
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Input Kata Sandi dengan Tombol Lihat/Sembunyikan -->
+        <div class="form-group">
+          <label for="loginPassword">
+            Kata Sandi <span class="req">*</span>
+          </label>
+          <div class="input-icon-group">
+            <i class="fa-solid fa-lock input-icon-lead"></i>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              class="form-control-with-icon" 
+              placeholder="Masukkan Kata Sandi" 
+              required
+              style="padding-right: 38px;"
+            >
+            <button 
+              type="button" 
+              id="btnTogglePassword" 
+              class="btn-toggle-eye" 
+              title="Lihat atau sembunyikan kata sandi"
+              aria-label="Toggle password visibility"
+              onclick="toggleLoginPassword(event)"
+            >
+              <i class="fa-solid fa-eye-slash" id="eyeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 10px;">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Masuk</span>
+        </button>
+
+      </form>
+
+      <!-- Hiasan Footer Kartu Login -->
+      <div class="auth-card-footer">
+        <span>Paskibra SMK Negeri 40 Jakarta</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       LAYAR 2: SISTEM UTAMA SETELAH LOGIN
+       ========================================================================== -->
+  <div id="appScreen" class="app-container">
+    
+    <!-- Backdrop Overlay untuk Mobile saat Sidebar terbuka -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+    <!-- SIDEBAR NAVIGASI (DESKTOP: FIXED/STATIC; MOBILE: OFF-CANVAS) -->
+    <aside id="appSidebar" class="app-sidebar">
+      
+      <!-- Header Khusus Mobile Drawer -->
+      <div class="sidebar-drawer-header">
+        <div class="sidebar-drawer-brand">
+          <div class="sidebar-drawer-logo-wrap">
+            <img src="logo-paskibra.png" alt="Logo Paskibra" class="sidebar-drawer-logo" onerror="this.onerror=null; this.src='logo-smk40.png';">
+          </div>
+          <div class="sidebar-drawer-brand-text">
+            <span class="sidebar-brand-title">Paskibra Garatika</span>
+            <span class="sidebar-brand-subtitle">SMKN 40 Jakarta</span>
+          </div>
+        </div>
+        <!-- Tombol Tutup Khusus Mobile Drawer -->
+        <button id="btnCloseSidebar" class="btn-sidebar-close-mobile" aria-label="Tutup Menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Menu Navigasi Sidebar -->
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-label" id="sidebarNavLabel">Navigasi Utama</div>
+        <ul class="sidebar-menu" id="sidebarMenuContainer">
+          <li>
+            <button class="nav-btn active" data-tab="tab-dashboard">
+              <i class="fa-solid fa-house nav-icon"></i>
+              <span>Beranda</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-tab="tab-anggota">
+              <i class="fa-solid fa-users nav-icon"></i>
+              <span>Anggota</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-tab="tab-divisi">
+              <i class="fa-solid fa-sitemap nav-icon"></i>
+              <span>Divisi</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-tab="tab-pengurus">
+              <i class="fa-solid fa-user-shield nav-icon"></i>
+              <span>Pengurus</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-tab="tab-arsip-laporan">
+              <i class="fa-solid fa-file-lines nav-icon"></i>
+              <span>Laporan</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Profil Pengguna & Logout di Bagian Bawah Sidebar -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name" id="currentLoggedUserText">Fiko Naufal Nur Rohman</div>
+            <div class="sidebar-user-role" id="currentLoggedUserRole">Ketua Umum Paskibra</div>
+          </div>
+        </div>
+        <button class="btn btn-outline-red btn-block btn-sidebar-logout" id="btnLogout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Keluar</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- AREA KONTEN UTAMA DI SISI KANAN SIDEBAR -->
+    <div class="app-main-area">
+
+      <!-- KONTEN UTAMA -->
+      <main class="main-wrapper">
+
+      <!-- TAB 1: DASHBOARD -->
+      <section id="tab-dashboard" class="tab-content active">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Dashboard</h2>
+            <p>Ringkasan Keanggotaan dan Laporan Divisi Ekstrakurikuler Paskibra.</p>
+          </div>
+        </div>
+
+        <!-- 3 CONTAINER UTAMA & NAVIGASI CEPAT INTERAKTIF -->
+        <div class="stats-interactive-grid">
+          
+          <!-- 1. Total Anggota (Klik untuk ke Data Anggota) -->
+          <div class="stat-card-nav" onclick="switchTab('tab-anggota')" role="button" tabindex="0" title="Klik untuk membuka Data Anggota">
+            <div class="stat-icon-wrap icon-theme-black">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-card-info-wrap">
+              <span class="stat-card-title">Total Anggota</span>
+              <div class="stat-card-body">
+                <h3 id="statTotalAnggota">0</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Total Divisi (Klik untuk ke Struktur Divisi) -->
+          <div class="stat-card-nav" onclick="switchTab('tab-divisi')" role="button" tabindex="0" title="Klik untuk membuka Struktur Divisi">
+            <div class="stat-icon-wrap icon-theme-black">
+              <i class="fa-solid fa-sitemap"></i>
+            </div>
+            <div class="stat-card-info-wrap">
+              <span class="stat-card-title">Total Divisi</span>
+              <div class="stat-card-body">
+                <h3 id="statTotalDivisi">8</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Total Pengurus (Klik untuk memfilter Pengurus Aktif G10) -->
+          <div class="stat-card-nav" onclick="navigasiKePengurus()" role="button" tabindex="0" title="Klik untuk melihat Pengurus Aktif">
+            <div class="stat-icon-wrap icon-theme-black">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="stat-card-info-wrap">
+              <span class="stat-card-title">Total Pengurus</span>
+              <div class="stat-card-body">
+                <h3 id="statTotalPengurus">0</h3>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5 Laporan Terkini -->
+        <div class="section-header" style="margin-top: 10px;">
+          <div class="section-title-box">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Laporan Divisi Terkini</h3>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="switchTab('tab-arsip-laporan')">
+            Semua Laporan
+          </button>
+        </div>
+        <div class="table-responsive dashboard-table-scroll">
+          <table class="custom-table table-cards-laporan">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Judul Laporan</th>
+                <th>Pelapor</th>
+                <th>Divisi</th>
+                <th>Status</th>
+                <th style="text-align: center;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="dashboardRecentLaporanBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 2: DATA ANGGOTA (CRUD) -->
+      <section id="tab-anggota" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Data Anggota</h2>
+            <p>Kelola data anggota, angkatan (G10, G11, Pelatih), divisi, dan status.</p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary" id="btnTambahKategori" onclick="bukaModalTambahKategori()" title="Kelola & Tambah Kategori / Angkatan">
+              <i class="fa-solid fa-tags"></i>
+              <span>Kelola Kategori</span>
+            </button>
+            <button type="button" class="btn btn-primary" id="btnTambahAnggota" title="Tambah Anggota Baru">
+              <i class="fa-solid fa-plus"></i>
+              <span>Tambah Anggota</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar (Search di kiri, Icon Filter & Refresh di kanan) -->
+        <div class="filter-panel-card" id="panelFilterAnggota">
+          <div class="filter-panel-search">
+            <i class="fa-solid fa-magnifying-glass search-icon-lead"></i>
+            <input type="text" id="searchAnggota" class="filter-search-input" placeholder="Cari Nama Anggota" autocomplete="off">
+            <button type="button" id="btnClearSearchAnggota" class="btn-clear-search" title="Hapus pencarian" aria-label="Hapus pencarian" style="display: none !important;" onclick="clearSearchAnggota()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+          <div class="filter-panel-actions">
+            <button type="button" class="btn-toolbar-icon" id="btnBukaModalFilter" title="Filter Angkatan & Kelas" aria-label="Filter Angkatan & Kelas" onclick="bukaModalFilterAnggota()">
+              <i class="fa-solid fa-filter"></i>
+              <span id="badgeFilterActive" class="filter-active-dot" style="display: none;"></span>
+            </button>
+            <button type="button" class="btn-toolbar-icon" id="btnResetFilterAnggota" title="Reset Semua Filter & Pencarian" aria-label="Reset Semua Filter & Pencarian" onclick="resetFilterAnggota()">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Container Tabel Anggota (Berdiri Sendiri) -->
+        <div class="table-card-container">
+          <div class="table-responsive">
+            <table class="custom-table table-cards-anggota">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">No</th>
+                  <th>Nama Lengkap</th>
+                  <th>Kelas</th>
+                  <th>Angkatan</th>
+                  <th style="text-align: center; width: 110px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabelAnggotaBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: STRUKTUR DIVISI (CRUD) -->
+      <section id="tab-divisi" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Struktur Divisi</h2>
+            <p>Daftar divisi resmi Paskibra SMKN 40 Jakarta, tugas pokok, dan koordinator.</p>
+          </div>
+          <button class="btn btn-primary" id="btnTambahDivisi">
+            <i class="fa-solid fa-plus"></i>
+            <span>Tambah Divisi</span>
+          </button>
+        </div>
+
+        <!-- Filter Toolbar Divisi (Live Search Standalone) -->
+        <div class="filter-panel-card" id="panelFilterDivisi" style="margin-bottom: 24px;">
+          <div class="filter-panel-search">
+            <i class="fa-solid fa-magnifying-glass search-icon-lead"></i>
+            <input type="text" id="searchDivisi" class="filter-search-input" placeholder="Cari Nama Divisi" autocomplete="off">
+            <button type="button" id="btnClearSearchDivisi" class="btn-clear-search" title="Hapus pencarian" aria-label="Hapus pencarian" style="display: none !important;" onclick="clearSearchDivisi()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="divisi-grid" id="divisiContainerGrid"></div>
+      </section>
+
+      <!-- TAB 4: DATA PENGURUS DARI KETUA HINGGA DIVISI TERAKHIR -->
+      <section id="tab-pengurus" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Data Pengurus</h2>
+            <p>Daftar pengurus Paskibra Garatika mulai dari Ketua hingga divisi pelaksana.</p>
+          </div>
+          <button class="btn btn-primary" onclick="bukaModalTambahPengurus()" title="Tetapkan / Tambah Pengurus dari Data Anggota">
+            <i class="fa-solid fa-plus"></i>
+            <span>Tambah Pengurus</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Toolbar Pengurus (Search di kiri, Icon Filter & Refresh di kanan) -->
+        <div class="filter-panel-card" id="panelFilterPengurus">
+          <div class="filter-panel-search">
+            <i class="fa-solid fa-magnifying-glass search-icon-lead"></i>
+            <input type="text" id="searchPengurus" class="filter-search-input" placeholder="Cari Nama Pengurus" autocomplete="off">
+            <button type="button" id="btnClearSearchPengurus" class="btn-clear-search" title="Hapus pencarian" aria-label="Hapus pencarian" style="display: none !important;" onclick="clearSearchPengurus()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+          <div class="filter-panel-actions">
+            <button type="button" class="btn-toolbar-icon" id="btnBukaModalFilterPengurus" title="Filter Pengurus" aria-label="Filter Pengurus" onclick="bukaModalFilterPengurus()">
+              <i class="fa-solid fa-filter"></i>
+              <span id="badgeFilterActivePengurus" class="filter-active-dot" style="display: none;"></span>
+            </button>
+            <button type="button" class="btn-toolbar-icon" id="btnResetFilterPengurus" title="Reset Semua Filter & Pencarian" aria-label="Reset Semua Filter & Pencarian" onclick="resetFilterPengurus()">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Container Tabel Pengurus (Berdiri Sendiri) -->
+        <div class="table-card-container">
+          <div class="table-responsive">
+            <table class="custom-table table-cards-pengurus">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">No</th>
+                  <th>Nama</th>
+                  <th>Kelas</th>
+                  <th>Angkatan</th>
+                  <th>Divisi</th>
+                  <th style="text-align: center; width: 110px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabelPengurusBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: BUAT LAPORAN DIVISI -->
+      <section id="tab-buat-laporan" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Buat Laporan Divisi</h2>
+            <p>Formulir laporan disesuaikan secara otomatis menurut tugas divisi masing-masing.</p>
+          </div>
+        </div>
+
+        <div class="laporan-creator-card">
+          
+          <!-- Pemilihan Divisi Pelapor -->
+          <div class="divisi-selector-box">
+            <label style="font-weight: 700; font-size: 0.875rem; display: block; margin-bottom: 4px; color: var(--text-main);">
+              Pilih Divisi Pelapor:
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+              Pelatih, Ketua Umum, dan Wakil Ketua tidak membuat laporan divisi (bertindak sebagai peninjau).
+            </p>
+
+            <div class="divisi-radio-group" id="radioGroupDivisi">
+              <label class="divisi-radio-label selected">
+                <input type="radio" name="divisiReport" value="sekretaris" checked>
+                <span>Divisi Sekretaris</span>
+              </label>
+              <label class="divisi-radio-label">
+                <input type="radio" name="divisiReport" value="bendahara">
+                <span>Divisi Bendahara</span>
+              </label>
+              <label class="divisi-radio-label">
+                <input type="radio" name="divisiReport" value="korlap">
+                <span>Divisi Koordinator Lapangan</span>
+              </label>
+              <label class="divisi-radio-label">
+                <input type="radio" name="divisiReport" value="sarpras">
+                <span>Divisi Sarana & Prasarana</span>
+              </label>
+              <label class="divisi-radio-label">
+                <input type="radio" name="divisiReport" value="media_kreatif">
+                <span>Divisi Media Kreatif</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Form Input Utama Laporan -->
+          <form id="formInputLaporan" novalidate onsubmit="simpanLaporan(event); return false;">
+            
+            <!-- Hidden inputs untuk data otomatis sistem -->
+            <input type="hidden" id="lapJudul" value="">
+            <input type="hidden" id="lapPelapor" value="">
+            <input type="hidden" id="lapLinkDriveUmum" value="">
+
+            <!-- Bar Tanggal Latihan & Sinkronisasi Folder Drive Otomatis -->
+            <div class="report-top-meta-card" style="background: #ffffff; border: 1px solid var(--border-medium); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                <div style="flex: 1; min-width: 260px;">
+                  <label for="lapTanggal" id="lblLapTanggal" style="font-weight: 700; font-size: 0.85rem; color: #0f172a; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-regular fa-calendar-days" style="color: var(--accent-red);"></i> <span id="lblTextLapTanggal">Tanggal Latihan (Hari Selasa)</span> <span class="req">*</span>
+                  </label>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <div style="max-width: 250px; flex: 1;">
+                      <input type="text" id="lapTanggal" class="form-control" placeholder="Pilih Hari Latihan (Selasa)..." readonly style="font-weight: 700; cursor: pointer; background: #ffffff;" required>
+                    </div>
+                    <span id="badgeMingguWrapper" class="badge-minggu" style="background: var(--accent-red); color: #fff; padding: 7px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap;">
+                      Minggu Ke-<span class="sync-report-minggu">-</span>
+                    </span>
+                  </div>
+                  <small id="subTextLapTanggal" style="display: block; margin-top: 4px; font-size: 0.72rem; color: var(--text-muted);">
+                    <i class="fa-solid fa-circle-info" style="color: var(--accent-red); margin-right: 4px;"></i>Hanya hari Selasa yang dapat dipilih (latihan mingguan).
+                  </small>
+                </div>
+
+                <div style="background: #f8fafc; border: 1px dashed var(--border-medium); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; color: #334155; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-brands fa-google-drive" style="color: var(--accent-red); font-size: 1.1rem;"></i>
+                  <div>
+                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Penyimpanan Google Drive Otomatis:</span>
+                    <span id="displayBulanDrive" style="font-size: 0.825rem; font-weight: 600; color: #0f172a;">Folder: <strong>Oktober 2026</strong></span>
+                  </div>
+                  <!-- Hidden / Synced dropdown agar kompatibel dengan sistem backend -->
+                  <select id="lapKategoriBulan" style="display: none;"></select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kontainer Form Dinamis Sesuai Divisi (Daftar Siswa, Status Hadir/Izin/Alfa, Agenda, dsb.) -->
+            <div id="dynamicTemplateContainer"></div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+              <button type="button" class="btn btn-primary" id="btnSimpanLaporan" onclick="simpanLaporan(event)">
+                <i class="fa-solid fa-cloud-arrow-up" style="margin-right: 6px;"></i> Simpan Laporan
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+      <!-- TAB KHUSUS SARPRAS: MASTER BARANG INVENTARIS -->
+      <section id="tab-barang-sarpras" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Kelola Barang Inventaris</h2>
+            <p>Kelola daftar master perlengkapan Sarana &amp; Prasarana Paskibra Garatika.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary" onclick="tambahBarangMasterSarpras()">
+              <i class="fa-solid fa-plus"></i> Tambah Barang
+            </button>
+          </div>
+        </div>
+
+        <!-- Toolbar: Live Search (Kiri) & Filter + Refresh Modal (Kanan) -->
+        <div class="filter-panel-card" id="panelFilterBarangMaster">
+          <!-- Search Input (Kiri) dengan Icon X Clear Otomatis -->
+          <div class="filter-panel-search">
+            <i class="fa-solid fa-magnifying-glass search-icon-lead"></i>
+            <input type="text" id="cariBarangMaster" class="filter-search-input" placeholder="Cari Nama Perlengkapan / Barang..." autocomplete="off" oninput="filterMasterSarpras()">
+            <button type="button" id="btnClearSearchBarangMaster" class="btn-clear-search" title="Hapus pencarian" aria-label="Hapus pencarian" style="display: none !important;" onclick="clearSearchBarangMaster()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Filter & Refresh Action Buttons (Kanan) -->
+          <div class="filter-panel-actions">
+            <button type="button" class="btn-toolbar-icon" id="btnBukaModalFilterBarang" title="Filter Kategori Barang" aria-label="Filter Kategori Barang" onclick="bukaModalFilterBarang()">
+              <i class="fa-solid fa-filter"></i>
+              <span class="filter-active-dot" id="badgeFilterActiveBarang" style="display: none;"></span>
+            </button>
+            <button type="button" class="btn-toolbar-icon" id="btnResetFilterBarang" title="Reset Filter & Pencarian" aria-label="Reset Filter & Pencarian" onclick="resetFilterBarang()">
+              <i class="fa-solid fa-arrow-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Container Tabel Master Barang (Standar Desain Garatika) -->
+        <div class="table-card-container">
+          <div class="table-responsive">
+            <table class="custom-table table-cards-sarpras" id="tabelMasterSarpras">
+              <thead>
+                <tr>
+                  <th style="width: 60px; text-align: center;">No</th>
+                  <th>Nama Perlengkapan / Barang</th>
+                  <th style="width: 180px; text-align: center;">Kategori</th>
+                  <th style="width: 130px; text-align: center;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyMasterSarpras">
+                <!-- Dirender via renderHalamanBarangSarpras() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: ARSIP LAPORAN (CRUD) -->
+      <section id="tab-arsip-laporan" class="tab-content">
+        <div class="section-header">
+          <div class="section-title-box">
+            <h2>Arsip Laporan</h2>
+            <p>Daftar laporan divisi yang telah diajukan, siap dicetak atau dikirim ke Google Drive.</p>
+          </div>
+          <div id="arsipAdminToolbar" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" id="btnSyncSemuaDrive" onclick="sinkronkanSemuaDariDrive()" title="Sinkronkan seluruh folder dan berkas langsung dari Google Drive">
+              <i class="fa-solid fa-arrows-rotate"></i> Sinkronkan dari Drive
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btnKelolaFolderBulanDrive" onclick="bukaModalKelolaKategoriDrive()" title="Kelola Folder Bulan di Google Drive">
+              <i class="fa-solid fa-folder-tree"></i> Kelola Folder Bulan
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btnAksesDrivePublik" onclick="aturAksesDrivePublik()" title="Atur izin berkas di Google Drive agar semua orang bisa membuka tanpa minta akses">
+              <i class="fa-solid fa-unlock"></i> Buka Akses Publik Drive
+            </button>
+          </div>
+          <div id="arsipUserToolbar" style="display: none; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-sm" id="btnUserBuatLaporanBaru" onclick="if (typeof batalEditLaporan === 'function') batalEditLaporan(); switchTab('tab-buat-laporan')" title="Buat Laporan Baru">
+              <i class="fa-solid fa-plus"></i> Buat Laporan Baru
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar Laporan (Tema Konsisten Garatika) -->
+        <div class="filter-panel-card" id="panelFilterLaporan">
+          <div class="filter-panel-search">
+            <i class="fa-solid fa-magnifying-glass search-icon-lead"></i>
+            <input type="text" id="searchLaporan" class="filter-search-input" placeholder="Cari Judul Laporan atau Nama Pelapor..." autocomplete="off" oninput="renderTabelLaporan()">
+            <button type="button" id="btnClearSearchLaporan" class="btn-clear-search" title="Hapus pencarian" aria-label="Hapus pencarian" style="display: none !important;" onclick="clearSearchLaporan()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+          <div class="filter-panel-actions">
+            <button type="button" class="btn-toolbar-icon" id="btnBukaModalFilterLaporan" title="Filter Periode & Divisi Laporan" aria-label="Filter Periode & Divisi Laporan" onclick="bukaModalFilterLaporan()">
+              <i class="fa-solid fa-filter"></i>
+              <span class="badge-filter-active" id="badgeFilterActiveLaporan" style="display: none;"></span>
+            </button>
+            <button type="button" class="btn-toolbar-icon" id="btnResetFilterLaporan" title="Reset Filter & Pencarian" aria-label="Reset Filter & Pencarian" onclick="resetFilterLaporan()">
+              <i class="fa-solid fa-arrow-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabel Laporan Divisi Tunggal Resmi -->
+        <div class="table-responsive">
+          <table class="custom-table table-cards-laporan">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Judul Laporan</th>
+                <th>Pelapor</th>
+                <th>Divisi</th>
+                <th>Status</th>
+                <th style="text-align: center; min-width: 160px;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelLaporanBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span>Paskibra SMK Negeri 40 Jakarta</span>
+      </div>
+    </footer>
+
+    </div> <!-- Tutup .app-main-area -->
+
+  </div> <!-- Tutup #appScreen -->
+
+  <!-- ==========================================================================
+       MODALS
+       ========================================================================== -->
+
+  <!-- MODAL: FILTER ANGGOTA (POP UP - CONTAINER SELECTION) -->
+  <div class="modal-backdrop" id="modalFilterAnggota">
+    <div class="modal-window modal-window-sm">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 6px;"></i> Filter Anggota</h3>
+        <button type="button" class="modal-close" onclick="batalFilterAnggota()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 18px 20px;">
+        <!-- Pilihan Angkatan Container -->
+        <div class="filter-choice-group">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-layer-group"></i> Angkatan Garatika:
+          </label>
+          <div class="filter-pill-grid" id="popupFilterAngkatanGrid">
+            <!-- Render dinamis via renderFilterAngkatanAnggotaPills() -->
+          </div>
+        </div>
+
+        <!-- Pilihan Tingkat Kelas & Jurusan Container -->
+        <div class="filter-choice-group" id="groupPopupFilterKelas">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-graduation-cap"></i> Tingkat Kelas:
+          </label>
+          <div class="filter-pill-grid" id="popupFilterTingkatGrid">
+            <button type="button" class="filter-pill-btn active" onclick="pilihPopupTingkatAnggotaBtn('')">Semua Kelas</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatAnggotaBtn('X')">Kelas X</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatAnggotaBtn('XI')">Kelas XI</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatAnggotaBtn('XII')">Kelas XII</button>
+          </div>
+
+          <!-- Container Pilihan Jurusan Pop-up -->
+          <div id="containerPopupJurusan" class="jurusan-btn-group-wrapper" style="display: none; margin-top: 14px;">
+            <span class="jurusan-group-label" style="display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px;">
+              <i class="fa-solid fa-shapes" style="color: var(--accent-red); margin-right: 4px;"></i> Pilih Jurusan:
+            </span>
+            <div class="jurusan-btn-grid" id="popupJurusanBtnGrid">
+              <button type="button" class="btn-jurusan-pill active" style="grid-column: span 3;" onclick="pilihPopupJurusanBtn('')">Semua Jurusan</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('AK')">AK</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('BR')">BR</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('MP')">MP</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('DKV 1')">DKV 1</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('DKV 2')">DKV 2</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanBtn('RPL')">RPL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border-light); background: #f8fafc; border-radius: 0 0 var(--radius-md) var(--radius-md);">
+        <button type="button" class="btn btn-outline" onclick="batalFilterAnggota()">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="terapkanFilterAnggota()">Terapkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FILTER PENGURUS (POP UP - CONTAINER SELECTION) -->
+  <div class="modal-backdrop" id="modalFilterPengurus">
+    <div class="modal-window modal-window-sm">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 6px;"></i> Filter Pengurus</h3>
+        <button type="button" class="modal-close" onclick="batalFilterPengurus()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 18px 20px;">
+        <!-- Pilihan Divisi Container -->
+        <div class="filter-choice-group">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-sitemap"></i> Divisi Kepengurusan:
+          </label>
+          <div class="filter-pill-grid" id="popupFilterDivisiPengurusGrid">
+            <!-- Render dinamis via renderFilterDivisiPengurusPills() -->
+          </div>
+        </div>
+
+        <!-- Pilihan Angkatan Container -->
+        <div class="filter-choice-group">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-layer-group"></i> Angkatan Garatika:
+          </label>
+          <div class="filter-pill-grid" id="popupFilterAngkatanPengurusGrid">
+            <!-- Render dinamis via renderFilterAngkatanPengurusPills() -->
+          </div>
+        </div>
+
+        <!-- Pilihan Tingkat Kelas & Jurusan Container -->
+        <div class="filter-choice-group" id="groupPopupFilterKelasPengurus">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-graduation-cap"></i> Tingkat Kelas:
+          </label>
+          <div class="filter-pill-grid" id="popupFilterTingkatPengurusGrid">
+            <button type="button" class="filter-pill-btn active" onclick="pilihPopupTingkatPengurusBtn('')">Semua Kelas</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatPengurusBtn('X')">Kelas X</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatPengurusBtn('XI')">Kelas XI</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihPopupTingkatPengurusBtn('XII')">Kelas XII</button>
+          </div>
+
+          <!-- Container Pilihan Jurusan Pop-up -->
+          <div id="containerPopupJurusanPengurus" class="jurusan-btn-group-wrapper" style="display: none; margin-top: 14px;">
+            <span class="jurusan-group-label" style="display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px;">
+              <i class="fa-solid fa-shapes" style="color: var(--accent-red); margin-right: 4px;"></i> Pilih Jurusan:
+            </span>
+            <div class="jurusan-btn-grid" id="popupJurusanBtnGridPengurus">
+              <button type="button" class="btn-jurusan-pill active" style="grid-column: span 3;" onclick="pilihPopupJurusanPengurusBtn('')">Semua Jurusan</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('AK')">AK</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('BR')">BR</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('MP')">MP</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('DKV 1')">DKV 1</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('DKV 2')">DKV 2</button>
+              <button type="button" class="btn-jurusan-pill" onclick="pilihPopupJurusanPengurusBtn('RPL')">RPL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border-light); background: #f8fafc; border-radius: 0 0 var(--radius-md) var(--radius-md);">
+        <button type="button" class="btn btn-outline" onclick="batalFilterPengurus()">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="terapkanFilterPengurus()">Terapkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FILTER LAPORAN DIVISI (POP UP - CONTAINER SELECTION) -->
+  <div class="modal-backdrop" id="modalFilterLaporan">
+    <div class="modal-window modal-window-sm">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 6px;"></i> Filter Laporan Divisi</h3>
+        <button type="button" class="modal-close" onclick="batalFilterLaporan()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 18px 20px;">
+        <!-- Pilihan Periode Bulan Container -->
+        <div class="filter-choice-group">
+          <label class="filter-choice-label">
+            <i class="fa-regular fa-calendar-days"></i> Periode Bulan:
+          </label>
+          <div class="filter-pill-grid" id="gridFilterBulanLaporan">
+            <!-- Render dinamis via renderFilterBulanLaporanPills() -->
+          </div>
+        </div>
+
+        <!-- Pilihan Divisi Pelapor Container (Hanya untuk Pimpinan) -->
+        <div class="filter-choice-group" id="groupPopupFilterDivisiLaporan">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-sitemap"></i> Divisi Pelapor:
+          </label>
+          <div class="filter-pill-grid" id="gridFilterDivisiLaporan">
+            <button type="button" class="filter-pill-btn active" onclick="pilihFilterDivisiLaporanBtn('')">Semua Divisi</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihFilterDivisiLaporanBtn('sekretaris')">Sekretaris</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihFilterDivisiLaporanBtn('bendahara')">Bendahara</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihFilterDivisiLaporanBtn('korlap')">Korlap</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihFilterDivisiLaporanBtn('sarpras')">Sarpras</button>
+            <button type="button" class="filter-pill-btn" onclick="pilihFilterDivisiLaporanBtn('media_kreatif')">Media Kreatif</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border-light); background: #f8fafc; border-radius: 0 0 var(--radius-md) var(--radius-md);">
+        <button type="button" class="btn btn-outline" onclick="batalFilterLaporan()">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="terapkanFilterLaporan()">Terapkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FILTER KATEGORI BARANG MASTER SARPRAS -->
+  <div class="modal-backdrop" id="modalFilterBarang">
+    <div class="modal-window modal-window-sm">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 6px;"></i> Filter Kategori Barang</h3>
+        <button type="button" class="modal-close" onclick="batalFilterBarang()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 18px 20px;">
+        <div class="filter-choice-group">
+          <label class="filter-choice-label">
+            <i class="fa-solid fa-tags"></i> Kategori Perlengkapan:
+          </label>
+          <div class="filter-pill-grid grid-1line-4" id="gridFilterKategoriBarang">
+            <button type="button" class="filter-pill-btn active" data-kat="Semua" onclick="pilihPopupFilterKategoriBarangBtn('Semua')">
+              Semua
+            </button>
+            <button type="button" class="filter-pill-btn" data-kat="Umum" onclick="pilihPopupFilterKategoriBarangBtn('Umum')">
+              Umum
+            </button>
+            <button type="button" class="filter-pill-btn" data-kat="Laki - Laki" onclick="pilihPopupFilterKategoriBarangBtn('Laki - Laki')">
+              Laki - Laki
+            </button>
+            <button type="button" class="filter-pill-btn" data-kat="Perempuan" onclick="pilihPopupFilterKategoriBarangBtn('Perempuan')">
+              Perempuan
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border-light); background: #f8fafc; border-radius: 0 0 var(--radius-md) var(--radius-md);">
+        <button type="button" class="btn btn-outline" onclick="batalFilterBarang()">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="terapkanFilterBarang()">Terapkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TAMBAH / EDIT ANGGOTA (TANPA NIS & NO WA) -->
+  <div class="modal-backdrop" id="modalAnggota">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="modalAnggotaTitle">Form Anggota</h3>
+        <button class="modal-close" onclick="closeModal('modalAnggota')">&times;</button>
+      </div>
+      <form id="formAnggota" onsubmit="simpanAnggota(event); return false;">
+        <input type="hidden" id="anggotaId">
+        <div class="modal-body">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="agtNama">Nama Lengkap <span class="req">*</span></label>
+              <input type="text" id="agtNama" class="form-control" placeholder="Masukkan Nama Lengkap" required>
+            </div>
+            <div class="form-group">
+              <label for="agtAngkatan">Angkatan Garatika <span class="req">*</span></label>
+              <select id="agtAngkatan" class="form-control" onchange="handleAngkatanChange()" required>
+                <option value="" disabled selected>Pilih Angkatan Garatika</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2" id="rowKelasDanDivisi">
+            <div class="form-group" id="groupInputKelas" style="display: none;">
+              <label for="agtTingkatKelas">Kelas & Jurusan <span class="req">*</span></label>
+              <select id="agtTingkatKelas" class="form-control" onchange="handleTingkatKelasChange()">
+                <option value="" disabled selected>Pilih Tingkat Kelas</option>
+                <option value="X">Kelas X</option>
+                <option value="XI">Kelas XI</option>
+                <option value="XII">Kelas XII</option>
+              </select>
+
+              <!-- Container Animasi Pilihan Button Jurusan -->
+              <div id="containerPilihanJurusan" class="jurusan-btn-group-wrapper" style="display: none;">
+                <span class="jurusan-group-label"><i class="fa-solid fa-layer-group" style="color: var(--accent-red); margin-right: 4px;"></i> Pilih Jurusan:</span>
+                <div class="jurusan-btn-grid" id="jurusanBtnGrid">
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('AK')">AK</button>
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('BR')">BR</button>
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('MP')">MP</button>
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('DKV 1')">DKV 1</button>
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('DKV 2')">DKV 2</button>
+                  <button type="button" class="btn-jurusan-pill" onclick="pilihJurusanBtn('RPL')">RPL</button>
+                </div>
+              </div>
+
+              <input type="hidden" id="agtKelas" name="agtKelas">
+            </div>
+
+            <div class="form-group" id="groupInputDivisi">
+              <label for="agtStatusDivisi">Divisi <span class="req">*</span></label>
+              <select id="agtStatusDivisi" class="form-control" onchange="handleStatusDivisiChange()">
+                <option value="" disabled selected>Pilih Status Divisi</option>
+                <option value="Non-Divisi">Non-Divisi</option>
+                <option value="Divisi">Divisi</option>
+              </select>
+
+              <!-- Container Animasi Pilihan Button Divisi -->
+              <div id="containerPilihanDivisi" class="divisi-btn-group-wrapper" style="display: none;">
+                <!-- Badge Penanda Divisi Aktif / Terpilih -->
+                <div id="activeDivisiInfoBadge" class="active-divisi-badge-box" style="display: none; margin-bottom: 10px; padding: 10px 12px; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 8px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="background: rgba(185, 28, 28, 0.1); color: var(--accent-red, #b91c1c); width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem;">
+                        <i class="fa-solid fa-id-badge"></i>
+                      </span>
+                      <div>
+                        <div style="font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Divisi Pengurus Terdeteksi</div>
+                        <div style="font-size: 0.875rem; font-weight: 700; color: #0f172a;" id="activeDivisiBadgeText">-</div>
+                      </div>
+                    </div>
+                    <span id="activeDivisiBadgeTag" class="badge" style="padding: 4px 10px; font-size: 0.75rem; border-radius: 20px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0;">
+                      <i class="fa-solid fa-check"></i> Terpilih
+                    </span>
+                  </div>
+                </div>
+
+                <span class="divisi-group-label"><i class="fa-solid fa-sitemap" style="color: var(--accent-red); margin-right: 4px;"></i> Pilih Divisi Kepengurusan:</span>
+                <div class="divisi-btn-grid" id="divisiBtnGrid"></div>
+              </div>
+
+              <input type="hidden" id="agtDivisi" name="agtDivisi">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modalAnggota')">Batal</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: KELOLA & TAMBAH KATEGORI / ANGKATAN PILIHAN -->
+  <div class="modal-backdrop" id="modalTambahKategori">
+    <div class="modal-window" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-tags" style="color: var(--accent-red); margin-right: 6px;"></i> Kelola Kategori / Angkatan</h3>
+        <button class="modal-close" onclick="closeModal('modalTambahKategori')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Form Tambah Kategori Baru -->
+        <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+          <label for="inputKategoriBaru" style="font-size: 0.825rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: block;">
+            <i class="fa-solid fa-plus-circle" style="color: var(--accent-red); margin-right: 4px;"></i> Tambah Kategori / Angkatan Baru
+          </label>
+          <form id="formTambahKategori" onsubmit="simpanKategoriBaru(event); return false;" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="text" id="inputKategoriBaru" class="form-control" placeholder="Masukkan Kategori Baru" required style="flex: 1; min-width: 180px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="white-space: nowrap;">
+              <i class="fa-solid fa-plus"></i> Tambah
+            </button>
+          </form>
+          <small style="color: var(--text-muted); font-size: 0.74rem; display: block; margin-top: 6px;">
+            Kategori baru akan otomatis muncul pada seluruh pilihan angkatan di aplikasi.
+          </small>
+        </div>
+
+        <!-- Daftar Kategori Tersedia -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 0;">
+              Daftar Kategori Angkatan Aktif (<span id="countKategoriAngkatan">0</span>):
+            </label>
+          </div>
+          <div id="listKategoriAngkatanContainer" style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto; padding-right: 2px;">
+            <!-- Render dinamis via renderListKategoriAngkatan() -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('modalTambahKategori')">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KELOLA FOLDER BULAN (ROUTING GOOGLE DRIVE) -->
+  <div class="modal-backdrop" id="modalKelolaKategoriDrive">
+    <div class="modal-window" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-folder-tree" style="color: var(--accent-red); margin-right: 6px;"></i> Kelola Folder Bulan (Google Drive)</h3>
+        <button class="modal-close" onclick="closeModal('modalKelolaKategoriDrive')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 16px;">
+          Ketua dapat menambahkan bulan baru di sini. Saat bulan ditambahkan, sistem akan <strong>otomatis langsung membuatkan folder bulan tersebut</strong> di dalam Google Drive Garatika Jayakarta.
+        </p>
+
+        <!-- Tambah Kategori Bulan Langsung -->
+        <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 8px; padding: 14px;">
+          <h4 style="font-size: 0.925rem; font-weight: 700; color: var(--accent-red); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-regular fa-calendar-plus"></i> Tambah Folder Bulan Baru
+          </h4>
+          <form id="formTambahKategoriBulan" onsubmit="simpanKategoriBulanBaru(event); return false;" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="month" id="inputBulanBaru" class="form-control" required style="flex: 1; min-width: 160px;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="simpanKategoriBulanBaru(event)">
+              <i class="fa-solid fa-plus"></i> Tambah & Buat Folder Drive
+            </button>
+          </form>
+          <div style="margin-top: 14px;">
+            <div style="margin-bottom: 8px;">
+              <label style="font-size: 0.775rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0;">Daftar Folder Bulan Tersedia di Drive:</label>
+            </div>
+            <div id="listKategoriBulanTags" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('modalKelolaKategoriDrive')">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TETAPKAN / TAMBAH PENGURUS (AUTOCOMPLETE REKOMENDASI NAMA) -->
+  <div class="modal-backdrop" id="modalTambahPengurus">
+    <div class="modal-window" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3>Tetapkan Pengurus Organisasi</h3>
+        <button class="modal-close" onclick="closeModal('modalTambahPengurus')">&times;</button>
+      </div>
+      <form id="formTambahPengurus" onsubmit="simpanPengurusDariModal(event); return false;">
+        <input type="hidden" id="pengurusAnggotaId">
+        <div class="modal-body">
+          <p style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 14px;">
+            Ketik nama anggota yang terdaftar. Pilih dari rekomendasi nama yang muncul agar data lainnya terisi otomatis.
+          </p>
+
+          <div class="form-group" style="position: relative;">
+            <label for="pengurusNamaSearch">Nama Anggota <span class="req">*</span></label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <input 
+                type="text" 
+                id="pengurusNamaSearch" 
+                class="form-control" 
+                placeholder="Ketik nama anggota terdaftar..." 
+                autocomplete="off" 
+                required
+                style="padding-right: 38px;"
+              >
+              <button type="button" id="btnClearSearchPengurusNama" class="btn-clear-search" title="Hapus nama" aria-label="Hapus nama" style="display: none !important; position: absolute; right: 8px; z-index: 5;" onclick="clearSearchPengurusNama()">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </div>
+            <div id="autocompleteNamaPengurus" class="autocomplete-dropdown" style="display: none;"></div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="pengurusKelas">Kelas (Otomatis)</label>
+              <input type="text" id="pengurusKelas" class="form-control" placeholder="Terisi otomatis" readonly style="background: #f8fafc; color: #475569;">
+            </div>
+            <div class="form-group">
+              <label for="pengurusAngkatan">Angkatan (Otomatis)</label>
+              <input type="text" id="pengurusAngkatan" class="form-control" placeholder="Terisi otomatis" readonly style="background: #f8fafc; color: #475569;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pengurusDivisi">Jabatan / Divisi Pengurus <span class="req">*</span></label>
+            <select id="pengurusDivisi" class="form-control" required></select>
+            <div id="pengurusDivisiInfoBadge" style="display: none; margin-top: 8px; padding: 8px 12px; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 6px; font-size: 0.8rem; color: #334155;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span><i class="fa-solid fa-circle-check" style="color: #10b981; margin-right: 5px;"></i> Divisi Saat Ini: <strong id="pengurusDivisiBadgeText">-</strong></span>
+                <span class="badge" style="padding: 2px 8px; font-size: 0.72rem; border-radius: 12px; background: #ecfdf5; color: #047857; font-weight: 600;">Terpilih</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modalTambahPengurus')">Batal</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tetapkan Pengurus</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: TAMBAH / EDIT DIVISI -->
+  <div class="modal-backdrop" id="modalDivisi">
+    <div class="modal-window" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3 id="modalDivisiTitle">Form Divisi</h3>
+        <button class="modal-close" onclick="closeModal('modalDivisi')">&times;</button>
+      </div>
+      <form id="formDivisi" onsubmit="simpanDivisi(event); return false;">
+        <input type="hidden" id="divisiIdInput">
+        <div class="modal-body">
+          <!-- 1. Nama Divisi -->
+          <div class="form-group">
+            <label for="divNama">Nama Divisi <span class="req">*</span></label>
+            <input type="text" id="divNama" class="form-control" placeholder="Masukkan Nama Divisi" required>
+          </div>
+
+          <!-- Info Personel Terdaftar (Informatif Saja, Penugasan dari Halaman Anggota) -->
+          <div class="form-group" id="groupDivDaftarNamaInfo" style="display: none;">
+            <label style="font-size: 0.8rem; color: #475569; font-weight: 700; display: block; margin-bottom: 4px;">Daftar Nama Personel Divisi Saat Ini</label>
+            <div id="divInfoDaftarNamaContainer" style="background: #f8fafc; border: 1.5px solid var(--border-medium); border-radius: var(--radius-sm); padding: 10px 12px; max-height: 120px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 8px 10px;">
+              <!-- Daftar nama personel yang bertugas ditampilkan sebagai info -->
+            </div>
+            <small style="color: #64748b; font-size: 0.725rem; margin-top: 4px; display: block;">
+              <i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Penugasan dan pergantian divisi anggota diatur melalui halaman <strong>Data Anggota</strong>.
+            </small>
+          </div>
+
+          <!-- 3. Password Divisi -->
+          <div class="form-group" id="groupDivPassword">
+            <label for="divPassword">Password Divisi <span class="req">*</span></label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <input type="password" id="divPassword" class="form-control" placeholder="Masukkan Password Divisi" style="padding-right: 42px;" required>
+              <button type="button" id="btnToggleDivPassword" style="position: absolute; right: 10px; background: none; border: none; cursor: pointer; color: #64748b; font-size: 1rem; padding: 4px;" title="Lihat/Sembunyikan kata sandi" onclick="toggleVisibilityDivPassword()">
+                <i class="fa-solid fa-eye-slash" id="eyeIconDivPassword"></i>
+              </button>
+            </div>
+            <small id="divPasswordHelp" style="color: #64748b; font-size: 0.75rem; margin-top: 4px; display: block;">
+              Password ini digunakan oleh anggota yang terdaftar di divisi ini untuk login ke sistem.
+            </small>
+            <div id="divPasswordRestrictedNotice" style="display: none; color: #b91c1c; font-size: 0.75rem; margin-top: 4px; font-weight: 500;">
+              <i class="fa-solid fa-lock"></i> Hanya Pelatih, Ketua, dan Wakil Ketua yang memiliki hak akses untuk mengatur password.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modalDivisi')">Batal</button>
+          <button type="submit" class="btn btn-primary" id="btnSimpanDivisi">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DETAIL DIVISI -->
+  <div class="modal-backdrop" id="modalDetailDivisi">
+    <div class="modal-window" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 id="detailDivisiNama">Detail Divisi</h3>
+        <button class="modal-close" onclick="closeModal('modalDetailDivisi')">&times;</button>
+      </div>
+      <div class="modal-body" id="detailDivisiContent">
+        <!-- Konten detail dinamis -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modalDetailDivisi')">Tutup</button>
+        <button type="button" class="btn btn-primary" id="btnDetailBukaPengurus">Lihat Pengurus Divisi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PRATINJAU KOP SURAT RESMI -->
+  <div class="modal-backdrop" id="modalCetakLaporan">
+    <div class="modal-window">
+      <div class="modal-header no-print">
+        <h3>Pratinjau Surat Laporan</h3>
+        <button class="modal-close" onclick="closeModal('modalCetakLaporan')">&times;</button>
+      </div>
+      <div class="modal-body" style="background: #f1f5f9; padding: 18px;">
+        
+        <div class="kop-surat-preview" id="lembarKopSurat">
+          
+          <!-- KOP SURAT RESMI (Sesuai Kop Surat Paskibra SMKN 40) -->
+          <div class="kop-header" style="border-bottom: 2.5px solid #000000;">
+            <img src="logo-smk40.png" alt="Logo SMKN 40" class="kop-logo" onerror="this.src='https://via.placeholder.com/64?text=SMK40'">
+            <div class="kop-text" style="font-family: 'Times New Roman', Times, serif;">
+              <h4 style="margin: 0; font-size: 13.5pt; font-weight: 900; color: #000000;">PASUKAN PENGIBAR BENDERA</h4>
+              <h3 style="margin: 2px 0 3px 0; font-size: 13.5pt; font-weight: 900; color: #000000;">SMK NEGERI 40 JAKARTA</h3>
+              <p style="margin: 0; font-size: 9pt; color: #000000;">Jl. Nanas II Utan Kayu Utara, Jakarta Timur 13120 Telp (021) 8563329</p>
+            </div>
+            <img src="logo-paskibra.png" alt="Logo Garatika" class="kop-logo" onerror="this.src='https://via.placeholder.com/64?text=Garatika'">
+          </div>
+
+          <!-- KONTEN LAPORAN -->
+          <div class="kop-body" id="isiLembarLaporan"></div>
+
+          <!-- TANDA TANGAN KEDINASAN (Dihilangkan Sesuai Preferensi) -->
+          <div class="kop-tanda-tangan" style="display: none;">
+            <div class="ttd-col">
+              <p>Mengetahui,</p>
+              <p><strong>Ketua Paskibra Garatika</strong></p>
+              <div class="ttd-space"></div>
+              <p><u>Fiko Naufal Nur Rohman</u></p>
+              <p>Angkatan G10</p>
+            </div>
+            <div class="ttd-col">
+              <p id="kopTtdKotaTanggal">Jakarta, 09 Oktober 2026</p>
+              <p><strong>Pelapor / Koordinator Divisi</strong></p>
+              <div class="ttd-space"></div>
+              <p><u id="kopTtdNamaPelapor">Nama Pelapor</u></p>
+              <p id="kopTtdDivisiPelapor">Divisi Terkait</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modalCetakLaporan')">Tutup</button>
+        <button type="button" class="btn btn-primary" onclick="window.print()">
+          Cetak / Simpan PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GOOGLE DRIVE STATUS -->
+  <div class="modal-backdrop" id="modalKirimDrive">
+    <div class="modal-window" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>Kirim Laporan ke Google Drive</h3>
+        <button class="modal-close" onclick="closeModal('modalKirimDrive')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="driveModalStatus"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modalKirimDrive')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SweetAlert2 (Modern Compact Alert Modal) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Flatpickr (Kalender Modern Paskibra - Khusus Hari Selasa & Mode Bulanan Sarpras) -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/id.js"></script>
+  <script src="js/vendor/flatpickr-monthSelect.js"></script>
+
+  <!-- jsPDF & AutoTable (Pembuat Dokumen PDF Resmi Garatika) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Scripts Terstruktur & Modular Berbahasa Indonesia -->
+  <script src="js/data.js?v=20261015p"></script>
+  <script src="js/modul/penyimpanan.js?v=20261015p"></script>
+  <script src="js/modul/navigasi_tampilan.js?v=20261015p"></script>
+  <script src="js/modul/autentikasi.js?v=20261015p"></script>
+  <script src="js/modul/dashboard.js?v=20261015p"></script>
+  <script src="js/modul/manajemen_anggota.js?v=20261015p"></script>
+  <script src="js/modul/manajemen_divisi.js?v=20261015p"></script>
+  <script src="js/modul/manajemen_pengurus.js?v=20261015p"></script>
+  <script src="js/modul/laporan_divisi.js?v=20261015p"></script>
+  <script src="js/modul/cetak_kop_surat.js?v=20261015p"></script>
+  <script src="js/modul/integrasi_drive.js?v=20261015p"></script>
+  <script src="js/modul/aplikasi_utama.js?v=20261015p"></script>
+
+  <!-- Registrasi PWA (Progressive Web App) Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then((reg) => {
+            console.log('PWA ServiceWorker registered with scope:', reg.scope);
+          })
+          .catch((err) => {
+            console.warn('PWA ServiceWorker registration failed:', err);
+          });
+      });
+    }
+
+    // Tangani event instalasi PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('PWA install prompt ready.');
+    });
+  </script>
+</body>
+</html>

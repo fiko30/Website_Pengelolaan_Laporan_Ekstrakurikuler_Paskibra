@@ -1,0 +1,352 @@
+/* ==========================================================================
+   APP CONTAINER & SIDEBAR LAYOUT (DESKTOP & MOBILE DRAWER)
+   ========================================================================== */
+.btn-sidebar-toggle {
+  display: none; /* Muncul di layar <= 1024px melalui responsif.css */
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-sidebar-toggle:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-medium);
+  color: var(--accent-red);
+}
+
+.app-container {
+  display: none;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  padding-top: 72px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.app-container.active {
+  display: flex;
+}
+
+/* SIDEBAR NAVIGASI (DESKTOP: PERMANEN FIXED 280PX; TIDAK BISA TERSCROLL; MOBILE: DRAWER) */
+.app-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: #ffffff;
+  border-right: 1px solid var(--border-light);
+  position: fixed;
+  top: 72px;
+  left: 0;
+  bottom: 0;
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Sidebar terkunci statis dan tidak bisa ter-scroll sama sekali */
+  z-index: 900;
+  transition: transform 0.25s ease, left 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Header & Tombol Tutup Khusus Mobile Drawer (Sembunyi di Desktop) */
+.sidebar-drawer-header {
+  display: none;
+}
+
+.btn-sidebar-close-mobile {
+  display: none; /* Muncul di layar <= 1024px melalui responsif.css */
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 1.15rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-sidebar-close-mobile:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Navigasi Utama di Sidebar (Sesi Diperbesar & Proporsional) */
+.sidebar-nav {
+  flex: 1;
+  overflow: hidden; /* Tidak scroll */
+  padding: 24px 16px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 0 14px 14px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Jarak antar sesi lebih lega */
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  width: 100%;
+}
+
+.sidebar-menu .nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 18px; /* Ukuran sesi diperbesar */
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: #334155;
+  font-size: 0.95rem; /* Teks menu diperbesar */
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.sidebar-menu .nav-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #f1f5f9;
+}
+
+.sidebar-menu .nav-btn.active {
+  background: #fef2f2 !important;
+  color: var(--accent-red) !important;
+  border-color: #fecaca !important;
+  font-weight: 700 !important;
+}
+
+.sidebar-menu .nav-btn .nav-icon {
+  font-size: 1.15rem; /* Ikon diperbesar */
+  width: 22px;
+  text-align: center;
+  color: #64748b;
+  transition: color 0.15s ease;
+}
+
+.sidebar-menu .nav-btn:hover .nav-icon {
+  color: #0f172a;
+}
+
+.sidebar-menu .nav-btn.active .nav-icon,
+.sidebar-menu .nav-btn.active span {
+  color: var(--accent-red) !important;
+}
+
+/* Bagian Footer Sidebar (Profil & Tombol Keluar) */
+.sidebar-footer {
+  padding: 18px 16px 20px;
+  border-top: 1px solid var(--border-light);
+  background: #fbfcfd;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+}
+
+.sidebar-user-avatar {
+  width: 42px; /* Avatar diperbesar */
+  height: 42px;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-user-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user-role {
+  font-size: 0.74rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.btn-sidebar-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 11px 16px;
+  min-height: 44px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--accent-red);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-sidebar-logout:hover {
+  background: var(--accent-red-soft);
+  border-color: var(--accent-red-border);
+}
+
+/* Area Konten Utama Sebelah Kanan Sidebar (Menyesuaikan Sidebar Fixed 280px) */
+.app-main-area {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  height: calc(100vh - 72px);
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bg-body);
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Backdrop Overlay untuk Mobile saat Sidebar Terbuka */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-backdrop.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ==========================================================================
+   LAYOUT & SECTIONS
+   ========================================================================== */
+.main-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px;
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-title-box {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.section-title-box h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.section-title-box p {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+  padding: 18px 24px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footer-content {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-align: center;
+}

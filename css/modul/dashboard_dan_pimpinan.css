@@ -1,0 +1,426 @@
+/* ==========================================================================
+   3 CONTAINER UTAMA & NAVIGASI CEPAT (INTERAKTIF & CLEAN)
+   ========================================================================== */
+.stats-interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.stat-card-nav {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  user-select: none;
+  position: relative;
+}
+
+.stat-card-nav:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+  border-color: #cbd5e1;
+}
+
+.stat-card-nav:active {
+  transform: translateY(0);
+}
+
+.stat-card-nav.stat-card-featured {
+  border-color: var(--border-light);
+  background: #ffffff;
+}
+
+.stat-card-nav.stat-card-featured:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+}
+
+.stat-card-header {
+  display: contents; /* Biarkan stat-icon-wrap dan stat-card-title menjadi flex item langsung */
+}
+
+.stat-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  align-self: center; /* Ikon berada di tengah vertikal antara judul dan angka total */
+}
+
+.stat-card-nav:hover .stat-icon-wrap {
+  transform: scale(1.06);
+}
+
+.icon-theme-black {
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.icon-theme-red {
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.stat-card-info-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-card-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.stat-card-body {
+  display: flex;
+  align-items: baseline;
+  padding-left: 0;
+}
+
+.stat-card-body h3 {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.text-accent-red {
+  color: #0f172a !important;
+}
+
+/* ==========================================================================
+   TABEL DASHBOARD LAPORAN TERKINI (DESKTOP SCROLL, MOBILE CARD CONTAINER)
+   ========================================================================== */
+.dashboard-table-scroll {
+  border-top: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+}
+
+@media screen and (min-width: 769px) {
+  .dashboard-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-table-scroll .custom-table {
+    min-width: 860px;
+    margin-bottom: 0;
+  }
+}
+
+.mobile-cell-label {
+  display: none;
+}
+
+.mobile-only-icon {
+  display: none;
+}
+
+.report-title-text {
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.member-name-text {
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.cell-title {
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.dashboard-table-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.dashboard-table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dashboard-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.text-date-full {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   STRUKTUR PIMPINAN & PELATIH (TEMA BERSIH: PUTIH, HITAM, MERAH)
+   ========================================================================== */
+.org-hierarchy {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.org-hierarchy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.org-level-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+  margin-bottom: 3px;
+}
+
+.org-level-desc {
+  font-size: 0.825rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.org-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #0f172a;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.org-leaders-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Kartu Pimpinan */
+.leader-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 20px 18px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.leader-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+/* Pita Atas Kartu */
+.leader-card-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.ribbon-pelatih {
+  background: #0f172a; /* Hitam Solid */
+}
+
+.ribbon-ketua {
+  background: linear-gradient(90deg, #b91c1c 0%, #ef4444 100%); /* Merah Paskibra */
+}
+
+.ribbon-wakil {
+  background: #334155; /* Slate Gelap */
+}
+
+/* Spesifik Kartu Ketua Umum (Flagship Elegan) */
+.leader-card-ketua {
+  border-color: #fecaca;
+  background: linear-gradient(180deg, #fffdfd 0%, #ffffff 100%);
+}
+
+.leader-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* Avatar Pimpinan */
+.leader-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.avatar-pelatih {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.avatar-ketua {
+  background: #b91c1c;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px #fee2e2;
+}
+
+.avatar-wakil {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Badge Jabatan Pimpinan */
+.leader-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.badge-pelatih {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.badge-ketua {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.badge-wakil {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+.leader-info {
+  margin-bottom: 14px;
+}
+
+.leader-name {
+  font-size: 1.025rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+  margin-bottom: 3px;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.leader-role {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Kotak Tugas Pokok & Kewenangan */
+.leader-meta-box {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.775rem;
+}
+
+.meta-box-ketua {
+  background: #fff8f8;
+  border-color: #fee2e2;
+}
+
+.leader-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meta-value {
+  color: #334155;
+  line-height: 1.4;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.text-accent-red {
+  color: #b91c1c;
+  font-weight: 600;
+}

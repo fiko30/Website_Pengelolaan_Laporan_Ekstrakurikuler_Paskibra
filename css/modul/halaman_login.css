@@ -1,0 +1,280 @@
+/* ==========================================================================
+   HALAMAN AUTH / LOGIN
+   ========================================================================== */
+.auth-wrapper {
+  display: none;
+  flex: 1;
+  background: var(--bg-page);
+  flex-direction: column;
+  align-items: center;
+  padding: 104px 16px 40px;
+  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.auth-wrapper.active {
+  display: flex;
+}
+
+/* Hiasan Ambient Lingkaran Latar Belakang */
+.auth-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.auth-bg-circle-1 {
+  width: 440px;
+  height: 440px;
+  top: -120px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(185, 28, 28, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.auth-bg-circle-2 {
+  width: 380px;
+  height: 380px;
+  bottom: -100px;
+  left: -70px;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.auth-card {
+  margin: auto 0;
+  position: relative;
+  z-index: 2;
+  background: var(--bg-surface);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(226, 232, 240, 0.6);
+  width: 100%;
+  max-width: 430px;
+  padding: 36px 30px 24px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Pita Aksen Dekoratif Atas Card (Merah Putih Hitam) */
+.auth-card-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-red) 0%, #ef4444 55%, var(--primary-dark) 100%);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* Emblem Ikon Lingkaran Profil User Elegan */
+.auth-emblem {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 10px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+  border: 1.5px solid #fecdd3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-red);
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.08), 0 0 0 4px rgba(254, 226, 226, 0.45);
+}
+
+/* Garis Pembatas Bintang Elegan (Setelah Icon Profile, Sebelum Judul) */
+.auth-title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 110px;
+  margin: 10px auto 14px;
+}
+
+.auth-title-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+}
+
+.auth-title-divider .divider-icon {
+  font-size: 0.65rem;
+  color: var(--accent-red);
+  opacity: 0.85;
+}
+
+.auth-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  font-size: 0.835rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+/* Hiasan Footer Kartu Login (Bersih, Rapi, Tanpa Ikon) */
+.auth-card-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Kotak Input Bersih */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.form-group label span.req {
+  color: var(--accent-red);
+}
+
+.input-icon-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-lead {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.input-icon-group:focus-within .input-icon-lead {
+  color: var(--accent-red);
+}
+
+.form-control-with-icon {
+  width: 100%;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  color: var(--text-main);
+  padding: 10px 14px 10px 40px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-control-with-icon:focus {
+  background: #ffffff;
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+}
+
+/* Tombol Toggle Eye */
+.btn-toggle-eye {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  z-index: 5;
+}
+
+.btn-toggle-eye:hover {
+  color: var(--text-main);
+  background: #f1f5f9;
+}
+
+.auth-card .btn-primary {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   PERINGATAN INLINE KECIL DI ATAS KOLOM INPUT LOGIN
+   ========================================================================== */
+.login-inline-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  animation: slideFadeDown 0.2s ease-out;
+}
+
+.login-inline-alert .alert-icon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  color: #dc2626;
+}
+
+@keyframes slideFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-control-with-icon.input-error {
+  border-color: #ef4444 !important;
+  background: #fffafa !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.12) !important;
+}

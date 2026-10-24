@@ -1,0 +1,1429 @@
+/* ==========================================================================
+   FORM LAPORAN
+   ========================================================================== */
+.laporan-creator-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.divisi-selector-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 20px;
+}
+
+.divisi-radio-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.divisi-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.divisi-radio-label:hover {
+  border-color: var(--text-muted);
+}
+
+.divisi-radio-label input[type="radio"] {
+  accent-color: var(--accent-red);
+}
+
+.divisi-radio-label.selected {
+  border-color: var(--accent-red);
+  background: var(--accent-red-soft);
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 768px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-control {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.1);
+}
+
+select.form-control optgroup,
+optgroup {
+  font-weight: 700;
+  font-style: normal;
+  color: #334155;
+  background-color: #f8fafc;
+  padding: 6px 4px 4px 6px;
+  text-align: left;
+}
+
+select.form-control optgroup option,
+optgroup option {
+  font-weight: 400;
+  color: var(--text-main);
+  background-color: #ffffff;
+  padding: 6px 16px;
+}
+
+/* Container Animasi Pilihan Button Jurusan */
+.jurusan-btn-group-wrapper {
+  margin-top: 8px;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 8px;
+  animation: slideDownFade 0.25s ease-out forwards;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jurusan-group-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 7px;
+}
+
+.jurusan-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.btn-jurusan-pill {
+  padding: 6px 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid var(--border-medium, #cbd5e1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.btn-jurusan-pill:hover {
+  border-color: var(--accent-red, #b91c1c);
+  color: var(--accent-red, #b91c1c);
+  background: #fff5f5;
+  transform: translateY(-1px);
+}
+
+.btn-jurusan-pill.active {
+  background: var(--accent-red, #b91c1c) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-red, #b91c1c) !important;
+  box-shadow: 0 2px 6px rgba(185, 28, 28, 0.25);
+  font-weight: 700;
+}
+
+/* Container Animasi & Tombol Pilihan Divisi Kepengurusan */
+.divisi-btn-group-wrapper {
+  margin-top: 8px;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 8px;
+  animation: slideDownFade 0.25s ease-out forwards;
+}
+
+.divisi-group-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 7px;
+}
+
+.divisi-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 6px;
+}
+
+.btn-divisi-pill {
+  padding: 7px 10px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid var(--border-medium, #cbd5e1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.btn-divisi-pill:hover {
+  border-color: var(--accent-red, #b91c1c);
+  color: var(--accent-red, #b91c1c);
+  background: #fff5f5;
+  transform: translateY(-1px);
+}
+
+.btn-divisi-pill.active {
+  background: var(--accent-red, #b91c1c) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-red, #b91c1c) !important;
+  box-shadow: 0 2px 6px rgba(185, 28, 28, 0.25);
+  font-weight: 700;
+}
+
+textarea.form-control {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.template-section-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.template-header-tag {
+  display: inline-block;
+  background: var(--text-main);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+
+/* ==========================================================================
+   STYLE FORM LAPORAN RESMI (REFERENSI WEBSITE PASKIB)
+   ========================================================================== */
+.report-date-badge-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.report-date-badge-box .badge-minggu {
+  background: var(--text-main);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.generation-filter-wrapper {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.generation-filter-label {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-gen-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-gen-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-medium);
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-gen-filter:hover {
+  background: #fff5f5;
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  transform: translateY(-1px);
+}
+
+.btn-gen-filter.active {
+  background: var(--accent-red) !important;
+  border-color: var(--accent-red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(185, 28, 28, 0.25);
+}
+
+.btn-gen-filter .badge-count {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-gen-filter.active .badge-count {
+  background: #ffffff !important;
+  color: var(--accent-red) !important;
+  border-color: transparent !important;
+}
+
+.report-summary-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.report-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.report-summary-chip.hadir {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.report-summary-chip.izin {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.report-summary-chip.alfa,
+.report-summary-chip.alpa {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.report-summary-chip.total {
+  background: #f8fafc;
+  color: #1e293b;
+  border-color: #e2e8f0;
+}
+
+.report-table-compact {
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+}
+
+.report-table-compact th {
+  background: #f1f5f9;
+  padding: 8px 10px;
+  font-weight: 600;
+  color: #334155;
+  border: 1px solid var(--border-medium);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.report-table-compact td {
+  padding: 6px 8px;
+  border: 1px solid var(--border-medium);
+  vertical-align: middle;
+}
+
+.report-table-compact input.form-control-table,
+.report-table-compact select.form-control-table {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #ffffff;
+  outline: none;
+}
+
+.report-table-compact input.form-control-table:focus,
+.report-table-compact select.form-control-table:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+/* Indikator Validasi Error Input Form & Tabel */
+.report-table-compact input.form-control-table.input-error,
+.report-table-compact select.form-control-table.input-error,
+.form-control.input-error,
+.form-control-table.input-error,
+input.input-error,
+select.input-error,
+textarea.input-error {
+  border-color: #ef4444 !important;
+  background-color: #fffafa !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18) !important;
+}
+
+/* Input Waktu Media Kreatif (Rata Kiri Elegan dengan Ruang Ikon Kalender Penuh & Tidak Terpotong) */
+.table-med-kreatif th:nth-child(2),
+.table-med-kreatif td.med-cell-waktu {
+  min-width: 185px !important;
+  width: 185px !important;
+}
+.table-med-kreatif input.med-waktu {
+  min-width: 165px !important;
+  width: 100% !important;
+  text-align: left !important;
+  padding-left: 10px !important;
+  padding-right: 28px !important;
+  font-size: 0.825rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+/* Hilangkan spin button pada input number tabel agar angka tidak terpotong */
+.report-table-compact input[type="number"]::-webkit-outer-spin-button,
+.report-table-compact input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.report-table-compact input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 4px 4px;
+}
+
+/* Penyesuaian select dalam tabel agar dropdown arrow tidak memotong teks */
+.report-table-compact select.form-control-table {
+  padding-right: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Desktop default styling untuk komponen baris kartu */
+.med-card-top-bar {
+  display: none;
+}
+.med-cell-label {
+  display: none;
+}
+.desktop-only-no {
+  display: inline;
+}
+
+/* Kalender Flatpickr Modern: Tema Bersih & Responsif (Khusus Dropdown Bulan/Tahun, Tanpa Arrow) */
+.flatpickr-calendar.flatpickr-all-dates {
+  border-radius: 16px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+  background: #ffffff !important;
+  width: 310px !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Sembunyikan arrow navigasi panah kiri & kanan pada kalender all-dates */
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-prev-month,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-next-month {
+  display: none !important;
+}
+
+/* Header Bulan & Tahun Kalender */
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-months {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 6px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 6px !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-month {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-current-month {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  transform: none !important;
+}
+
+/* Dropdown Pemilihan Bulan & Tahun Elegan */
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-monthDropdown-months,
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-year-dropdown {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  padding: 5px 10px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  height: 34px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.15s ease !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-monthDropdown-months:hover,
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-year-dropdown:hover,
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-monthDropdown-months:focus,
+.flatpickr-calendar.flatpickr-all-dates select.flatpickr-year-dropdown:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+
+/* Header Nama Hari */
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-weekdays {
+  background: #f1f5f9 !important;
+  border-radius: 8px !important;
+  padding: 6px 0 !important;
+  margin-bottom: 4px !important;
+  border-bottom: none !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates span.flatpickr-weekday {
+  color: #475569 !important;
+  font-weight: 700 !important;
+  font-size: 0.775rem !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates span.flatpickr-weekday:nth-child(2) {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+
+/* Container Hari Kalender */
+.flatpickr-calendar.flatpickr-all-dates .dayContainer {
+  width: 290px !important;
+  min-width: 290px !important;
+  max-width: 290px !important;
+  padding: 2px !important;
+  justify-content: space-around !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-days {
+  padding: 4px !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
+  color: #1e293b !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  max-width: 36px !important;
+  margin: 2px !important;
+  transition: all 0.15s ease !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day:hover,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):hover {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+  border-color: transparent !important;
+  transform: scale(1.08) !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.today {
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+  background: #fff1f2 !important;
+  font-weight: 700 !important;
+}
+
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.selected,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.selected:hover {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border-color: #dc2626 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4) !important;
+}
+
+/* Sembunyikan tanggal masa depan dan prev/next month (Real-time per hari) */
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.prevMonthDay,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.nextMonthDay,
+.flatpickr-calendar.flatpickr-all-dates .flatpickr-day.future-day-hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Posisi kalender terpusat rapi di layar HP (Modal Center) */
+@media (max-width: 640px) {
+  .flatpickr-calendar.flatpickr-all-dates {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 310px !important;
+    max-width: calc(100vw - 32px) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
+    z-index: 999999 !important;
+    margin: 0 !important;
+  }
+  .flatpickr-calendar.flatpickr-all-dates::before,
+  .flatpickr-calendar.flatpickr-all-dates::after {
+    display: none !important;
+  }
+}
+
+/* Placeholder saat metrik dinonaktifkan / disembunyikan (Desktop Table) */
+.med-metric-placeholder {
+  display: none;
+  color: #94a3b8;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+td.is-metric-hidden {
+  background: #f8fafc;
+}
+
+td.is-metric-hidden .med-metric-placeholder {
+  display: block !important;
+}
+
+.med-chat-notice-card {
+  display: none;
+}
+
+/* ==========================================================================
+   TAMPILAN KHUSUS LAYAR KECIL / HP / MOBILE FORM MEDIA KREATIF (KARTU POSTINGAN)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Sembunyikan hint geser tabel di HP karena sudah menjadi kartu mandiri */
+  .mobile-table-hint,
+  .med-table-container .mobile-table-hint {
+    display: none !important;
+  }
+
+  .med-table-container {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow-x: visible !important;
+  }
+
+  .table-med-kreatif {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .table-med-kreatif thead {
+    display: none !important;
+  }
+
+  .table-med-kreatif tbody {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Baris tabel bertransformasi menjadi Kartu Postingan */
+  .table-med-kreatif tr.med-row-item {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 12px 10px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    padding: 16px 14px !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .desktop-only-no {
+    display: none !important;
+  }
+
+  .med-card-top-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .med-card-badge {
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-card-delete {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    font-size: 0.775rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-card-delete:hover {
+    background: #dc2626;
+    color: #ffffff;
+  }
+
+  .med-cell-label {
+    display: block !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+    margin-bottom: 4px !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+  }
+
+  /* Reset border dan padding sel td */
+  .table-med-kreatif td {
+    border: none !important;
+    padding: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Tata letak grid tiap input di layar mobile */
+  .med-cell-no {
+    grid-column: 1 / -1 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Row 1: Waktu & Platform (50% / 50%) */
+  .med-cell-waktu {
+    grid-column: span 3 !important;
+  }
+  .med-cell-platform {
+    grid-column: span 3 !important;
+  }
+
+  /* Row 2: Tipe Konten & Judul (Full Width) */
+  .med-cell-tipe {
+    grid-column: 1 / -1 !important;
+  }
+  .med-cell-nama {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Row 3: Jangkauan, Like, Komen (1/3 each = 6 cols) */
+  .med-cell-jangkau {
+    grid-column: span 2 !important;
+  }
+  .med-cell-like {
+    grid-column: span 2 !important;
+  }
+  .med-cell-komen {
+    grid-column: span 2 !important;
+  }
+
+  /* Row 4: Share, Repost, Save (1/3 each = 6 cols) */
+  .med-cell-share {
+    grid-column: span 2 !important;
+  }
+  .med-cell-repost {
+    grid-column: span 2 !important;
+  }
+  .med-cell-save {
+    grid-column: span 2 !important;
+  }
+
+  /* Row 5: Kunjungan & Followers (50% each = 6 cols) */
+  .med-cell-kunjungan {
+    grid-column: span 3 !important;
+  }
+  .med-cell-followers {
+    grid-column: span 3 !important;
+  }
+
+  /* Row 6: Profil%, Kabar%, Jelajah% (1/3 each = 6 cols) */
+  .med-cell-profil {
+    grid-column: span 2 !important;
+  }
+  .med-cell-kabar {
+    grid-column: span 2 !important;
+  }
+  .med-cell-jelajah {
+    grid-column: span 2 !important;
+  }
+
+  /* SEMBUNYIKAN TOMBOL AKSI DESKTOP DENGAN SPESIFISITAS TINGGI */
+  .table-med-kreatif td.med-cell-aksi,
+  .table-med-kreatif tr.med-row-item td.med-cell-aksi {
+    display: none !important;
+  }
+
+  /* Sembunyikan sel metrik yang dinonaktifkan di tampilan kartu mobile */
+  .table-med-kreatif td.is-metric-hidden,
+  .table-med-kreatif tr.med-row-item td.is-metric-hidden {
+    display: none !important;
+  }
+
+  /* Grid penyesuaian TikTok mode pada kartu mobile */
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-like {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-komen {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-share {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-repost {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-save {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-kunjungan {
+    grid-column: span 2 !important;
+  }
+  .table-med-kreatif tr.med-row-item.is-tiktok-mode .med-cell-followers {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Banner informasi mode Chat / WhatsApp di tampilan mobile */
+  .table-med-kreatif tr.med-row-item .med-chat-notice-card {
+    grid-column: 1 / -1 !important;
+    background: #f0fdf4 !important;
+    border: 1px dashed #86efac !important;
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: #166534 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  .table-med-kreatif input.form-control-table,
+  .table-med-kreatif select.form-control-table {
+    padding: 8px 10px !important;
+    font-size: 0.85rem !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.15s ease !important;
+  }
+  .table-med-kreatif input.form-control-table:focus,
+  .table-med-kreatif select.form-control-table:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+    outline: none !important;
+  }
+
+  .table-med-kreatif input.med-waktu {
+    text-align: left !important;
+    padding-left: 12px !important;
+    padding-right: 32px !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .table-med-kreatif tr.med-row-item {
+    padding: 12px 10px !important;
+    gap: 8px 6px !important;
+  }
+
+  .med-cell-tipe {
+    grid-column: 1 / -1 !important;
+  }
+
+  .med-cell-nama {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Bendahara Kas Row Base Elements */
+.ben-nama-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
+
+.ben-mobile-num {
+  display: none;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.ben-nama-text {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ben-kelas-badge {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Di desktop, sembunyikan mobile-only-badge di dalam nama karena sudah ada kolom Kelas terpisah */
+.ben-nama-wrapper .mobile-only-badge {
+  display: none;
+}
+
+.cell-ben-kelas {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.metric-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.metric-card-box {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 8px 8px;
+  text-align: left;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.metric-card-box small {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metric-card-box .val-text {
+  font-size: clamp(0.84rem, 0.95vw, 0.98rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.metric-card-box.saldo-box {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.metric-card-box.saldo-box .val-text {
+  color: #16a34a;
+}
+
+/* Tab Switcher Arsip: Laporan vs Berkas Google Drive */
+.view-switch-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.btn-view-tab {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-view-tab:hover {
+  background: #f8fafc;
+  color: #1e293b;
+  border-color: #94a3b8;
+}
+
+.btn-view-tab.active {
+  background: #fef2f2;
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+  box-shadow: 0 1px 3px rgba(185, 28, 28, 0.1);
+}
+
+/* ==========================================================================
+   KALENDER MODERN FLATPICKR (HANYA HARI SELASA AKTIF)
+   ========================================================================== */
+.flatpickr-calendar {
+  background: #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.2), 0 8px 10px -6px rgba(15, 23, 42, 0.15) !important;
+  border: 1px solid var(--border-medium) !important;
+  font-family: inherit !important;
+  width: 320px !important;
+  padding: 10px !important;
+  z-index: 99999 !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months {
+  background: #0f172a !important;
+  border-radius: 10px 10px 0 0 !important;
+  padding: 6px 2px !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months .flatpickr-month {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  height: 38px !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-current-month {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  padding-top: 4px !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-current-month .cur-month {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-current-month input.cur-year {
+  color: #f87171 !important;
+  font-weight: 800 !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months .flatpickr-prev-month,
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months .flatpickr-next-month {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  padding: 6px 10px !important;
+  height: 38px !important;
+}
+
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-months .flatpickr-next-month:hover svg {
+  fill: var(--accent-red) !important;
+}
+
+.flatpickr-weekdays {
+  background: #f1f5f9 !important;
+  margin-top: 6px !important;
+  border-radius: 6px !important;
+  padding: 4px 0 !important;
+}
+
+span.flatpickr-weekday {
+  color: #64748b !important;
+  font-weight: 700 !important;
+  font-size: 0.775rem !important;
+}
+
+/* Khusus kalender mingguan: Kolom Hari Selasa diberi aksen merah */
+.flatpickr-calendar.flatpickr-weekly-only span.flatpickr-weekday:nth-child(2) {
+  color: var(--accent-red) !important;
+  font-weight: 800 !important;
+  text-decoration: underline;
+}
+
+.flatpickr-day {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  transition: all 0.15s ease !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  max-width: 36px !important;
+  margin: 2px !important;
+  border: 1px solid transparent !important;
+  background: transparent;
+  color: #1e293b;
+}
+
+/* Sembunyikan tanggal bulan lain serta tanggal masa depan (muncul real-time per hari) */
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.future-day-hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hari non-Selasa ditutup (disabled) khusus di kalender latihan mingguan */
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-day.flatpickr-disabled,
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-day.flatpickr-disabled:hover {
+  color: #94a3b8 !important;
+  background: transparent !important;
+  cursor: not-allowed !important;
+  opacity: 0.75 !important;
+  pointer-events: none !important;
+  text-decoration: none !important;
+}
+
+/* Khusus kalender mingguan: Hari Selasa yang dibuka / aktif */
+.flatpickr-calendar.flatpickr-weekly-only .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
+  color: #b91c1c !important;
+  background: #fff1f2 !important;
+  border: 1.5px solid var(--accent-red) !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+.flatpickr-day:hover {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+  border-color: transparent !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+  background: var(--accent-red) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-red) !important;
+  box-shadow: 0 4px 10px rgba(185, 28, 28, 0.45) !important;
+  font-weight: 800 !important;
+}
+
+/* ==========================================================================
+   FILTER ANGKATAN G10 & G11 (MODERN RED-BLACK THEME)
+   ========================================================================== */
+.generation-filter-wrapper {
+  background: #f8fafc;
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 16px 0;
+}
+
+.generation-filter-label {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-gen-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-gen-filter {
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  background: #ffffff;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-gen-filter:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  background: #fef2f2;
+}
+
+.btn-gen-filter.active {
+  border-color: var(--accent-red) !important;
+  background: var(--accent-red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(185, 28, 28, 0.28) !important;
+}
+
+.btn-gen-filter.active .badge-count {
+  background-color: #ffffff !important;
+  color: var(--accent-red) !important;
+}
+
+.btn-gen-filter .badge-count {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   REKAP REALTIME CHIPS (MODERN COMPACT)
+   ========================================================================== */
+.report-summary-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.report-summary-chip {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.report-summary-chip.hadir {
+  background: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
+}
+
+.report-summary-chip.izin {
+  background: #fffbeb;
+  color: #d97706;
+  border-color: #fde68a;
+}
+
+.report-summary-chip.alfa {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.report-summary-chip.total {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   FLATPICKR THEME & HIDE ADJACENT MONTH DAYS (1 BULAN 1 BULAN SAJA)
+   ========================================================================== */
+.flatpickr-calendar {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid var(--border-medium) !important;
+  font-family: inherit !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-months .flatpickr-month {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-current-month {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  padding: 4px 10px !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-current-month .flatpickr-monthDropdown-months {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  margin-right: 4px !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-current-month .flatpickr-monthDropdown-months option {
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-current-month .numInputWrapper {
+  margin-left: 4px !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-current-month input.cur-year {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-months .flatpickr-prev-month, 
+.flatpickr-calendar:not(.flatpickr-all-dates) .flatpickr-months .flatpickr-next-month {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* ==========================================================================
+   DROPDOWN KEHADIRAN: PLACEHOLDER ABU-ABU TIPIS & HIDDEN DI PILIHAN
+   ========================================================================== */
+.sek-status.is-placeholder {
+  color: #94a3b8 !important;
+  font-weight: 500 !important;
+}
+
+.sek-status:not(.is-placeholder) {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   TEKS KELAS POLOS (TANPA CONTAINER ABU-ABU & TEPAT DI TENGAH)
+   ========================================================================== */
+.report-table-compact td.text-center,
+.report-table-compact th.text-center {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.sek-kelas-text {
+  color: #334155;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  display: block !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+
+
+
+

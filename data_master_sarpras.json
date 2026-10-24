@@ -1,0 +1,97 @@
+[
+  {
+    "id": "srp-1",
+    "nama": "Slayer",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-2",
+    "nama": "Slempang",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-3",
+    "nama": "Garuda",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-4",
+    "nama": "Kopel",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-5",
+    "nama": "Sarung Tangan",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-6",
+    "nama": "Sepatu Pantofel Cewe",
+    "kategori": "Perempuan"
+  },
+  {
+    "id": "srp-7",
+    "nama": "Sepatu Pantofel Tali Cowo",
+    "kategori": "Laki - Laki"
+  },
+  {
+    "id": "srp-8",
+    "nama": "Sepatu Pantofel Laki-Laki",
+    "kategori": "Laki - Laki"
+  },
+  {
+    "id": "srp-9",
+    "nama": "Peci Cewe Cowo",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-10",
+    "nama": "Baju PDU Cewe",
+    "kategori": "Perempuan"
+  },
+  {
+    "id": "srp-11",
+    "nama": "Rok PDU Cewe",
+    "kategori": "Perempuan"
+  },
+  {
+    "id": "srp-12",
+    "nama": "Celana PDU Cowo",
+    "kategori": "Laki - Laki"
+  },
+  {
+    "id": "srp-13",
+    "nama": "Bendera",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-14",
+    "nama": "Taplak Bendera",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-15",
+    "nama": "Talikur",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-16",
+    "nama": "Belt Putih",
+    "kategori": "Umum"
+  },
+  {
+    "id": "srp-17",
+    "nama": "Peci Perempuan",
+    "kategori": "Perempuan"
+  },
+  {
+    "id": "srp-18",
+    "nama": "Peci Laki-Laki",
+    "kategori": "Laki - Laki"
+  },
+  {
+    "id": "srp-19",
+    "nama": "Evolet",
+    "kategori": "Umum"
+  }
+]
