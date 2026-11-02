@@ -5,7 +5,7 @@
  * =========================================================================
  */
 
-const CACHE_NAME = 'garatika-pwa-v2026.2';
+const CACHE_NAME = 'garatika-pwa-v2026.3';
 
 const STATIC_ASSETS = [
   './',
@@ -28,6 +28,7 @@ const STATIC_ASSETS = [
   './css/responsif.css',
   './css/flatpickr-monthSelect.css',
   './css/modul/variabel_dan_dasar.css',
+  './css/modul/splash_opening.css',
   './css/modul/tata_letak_aplikasi.css',
   './css/modul/komponen_ui.css',
   './css/modul/halaman_login.css',

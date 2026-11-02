@@ -111,6 +111,9 @@ function showAuthScreen() {
   const appScreen = document.getElementById("appScreen");
   const btnToggle = document.getElementById("btnToggleSidebar");
   
+  document.documentElement.classList.remove("app-user-authenticated");
+  document.documentElement.classList.add("app-user-unauthenticated");
+
   document.body.classList.remove("user-logged-in");
   document.body.classList.add("user-not-logged-in");
 
@@ -141,6 +144,9 @@ function showAppScreen() {
   const appScreen = document.getElementById("appScreen");
   const btnToggle = document.getElementById("btnToggleSidebar");
   
+  document.documentElement.classList.add("app-user-authenticated");
+  document.documentElement.classList.remove("app-user-unauthenticated");
+
   document.body.classList.remove("user-not-logged-in");
   document.body.classList.add("user-logged-in");
 
@@ -535,6 +541,12 @@ function handleLogout() {
       if (result.isConfirmed) {
         state.currentUser = null;
         localStorage.removeItem("garatika_auth_user");
+        document.documentElement.classList.remove("app-user-authenticated");
+        document.documentElement.classList.add("app-user-unauthenticated");
+        const inputNama = document.getElementById("loginNama");
+        const inputPass = document.getElementById("loginPassword");
+        if (inputNama) inputNama.value = "";
+        if (inputPass) inputPass.value = "";
         showAuthScreen();
       }
     });
@@ -542,6 +554,12 @@ function handleLogout() {
     if (confirm("Apakah Anda ingin keluar dari sistem?")) {
       state.currentUser = null;
       localStorage.removeItem("garatika_auth_user");
+      document.documentElement.classList.remove("app-user-authenticated");
+      document.documentElement.classList.add("app-user-unauthenticated");
+      const inputNama = document.getElementById("loginNama");
+      const inputPass = document.getElementById("loginPassword");
+      if (inputNama) inputNama.value = "";
+      if (inputPass) inputPass.value = "";
       showAuthScreen();
     }
   }

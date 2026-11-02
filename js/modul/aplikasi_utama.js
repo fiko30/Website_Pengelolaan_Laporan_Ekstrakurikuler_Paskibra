@@ -151,6 +151,20 @@ function initEventListeners() {
   sidebarBackdrop?.addEventListener("click", () => toggleSidebar(false));
 }
 
+// Tutup Layar Opening / Splash Screen dengan Efek Transisi Mulus
+function dismissSplashScreen() {
+  const splash = document.getElementById("appSplashScreen");
+  if (!splash) return;
+  splash.classList.add("splash-fade-out");
+  setTimeout(() => {
+    if (splash.style && typeof splash.style.setProperty === "function") {
+      splash.style.setProperty("display", "none", "important");
+    } else if (splash.style) {
+      splash.style.display = "none";
+    }
+  }, 500);
+}
+
 // Inisialisasi Saat Dokumen Selesai Dimuat
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof initStorage === "function") initStorage();
@@ -160,6 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof initEventListeners === "function") initEventListeners();
   if (typeof initPasswordToggle === "function") initPasswordToggle();
 
+  // Transisi opening splash screen yang halus & elegan
+  setTimeout(() => {
+    dismissSplashScreen();
+  }, 650);
+
   // Sinkronisasi data cloud (anggota, divisi, laporan) di latar belakang saat aplikasi dibuka / di-refresh
   if (typeof fetchDataFromGAS === "function" && state.gasWebhookUrl) {
     setTimeout(() => {
@@ -168,6 +187,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Cadangan penutupan splash screen jika dokumen sudah dalam status siap
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  setTimeout(() => {
+    dismissSplashScreen();
+  }, 650);
+}
+
 // Window Exports
 window.renderAll = renderAll;
 window.initEventListeners = initEventListeners;
+window.dismissSplashScreen = dismissSplashScreen;
