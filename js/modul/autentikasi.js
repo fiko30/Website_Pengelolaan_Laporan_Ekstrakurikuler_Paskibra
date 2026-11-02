@@ -32,8 +32,8 @@ function isUserPimpinan(user = state.currentUser) {
   
   if (role === "ketua" || role === "pelatih" || role === "wakil_ketua" || role === "pimpinan") return true;
   if (divisiId === "ketua" || divisiId === "pelatih" || divisiId === "wakil_ketua") return true;
-  if (jabatan.includes("ketua") || jabatan.includes("pelatih") || jabatan.includes("wakil")) return true;
-  if (divisi.includes("ketua") || divisi.includes("pelatih") || divisi.includes("wakil")) return true;
+  if (jabatan === "ketua umum" || jabatan === "ketua" || jabatan.includes("pelatih") || jabatan.includes("wakil ketua")) return true;
+  if (divisi === "ketua" || divisi === "pelatih" || divisi.includes("wakil")) return true;
   if (angkatan.includes("pelatih")) return true;
   
   return false;
@@ -254,7 +254,10 @@ function clearLoginAlert() {
 }
 
 async function handleLogin(e) {
-  e.preventDefault();
+  if (e) {
+    if (typeof e.preventDefault === "function") e.preventDefault();
+    if (typeof e.stopPropagation === "function") e.stopPropagation();
+  }
   const inputNamaElem = document.getElementById("loginNama");
   const inputPassElem = document.getElementById("loginPassword");
   const btnSubmit = document.getElementById("btnLoginSubmit") || document.querySelector("#formLogin button[type='submit']");
@@ -380,9 +383,9 @@ async function handleLogin(e) {
     const userJabatan = (user.jabatan || "").trim().toLowerCase();
     const userAngkatan = (user.angkatan || "").trim().toLowerCase();
 
-    const isPelatih = (userAngkatan.includes("pelatih") || userDiv.includes("pelatih") || userDivId === "pelatih" || userJabatan.includes("pelatih") || inputLower === "pelatih");
-    const isKetua = (userDivId === "ketua" || userDiv === "ketua" || userJabatan.includes("ketua umum") || (userJabatan.includes("ketua") && !userJabatan.includes("wakil")) || inputLower === "ketua" || inputLower === "ketua garatika");
-    const isWakil = (userDivId === "wakil_ketua" || userDiv.includes("wakil") || userJabatan.includes("wakil") || inputLower === "wakil ketua");
+    const isPelatih = (userAngkatan.includes("pelatih") || userDivId === "pelatih" || userDiv === "pelatih" || userJabatan.includes("pelatih") || inputLower === "pelatih");
+    const isKetua = (userDivId === "ketua" || userDiv === "ketua" || userJabatan === "ketua umum" || userJabatan === "ketua" || inputLower === "ketua" || inputLower === "ketua garatika" || inputLower === "fiko naufal nur rohman");
+    const isWakil = (userDivId === "wakil_ketua" || userDiv.includes("wakil") || userJabatan.includes("wakil ketua") || inputLower === "wakil ketua");
 
     // Cari divisi resmi yang ditempati user di daftar divisi database
     let divisionObj = divisionList.find(d => {
@@ -442,29 +445,13 @@ async function handleLogin(e) {
         : (divisionObj.password || "");
     }
 
-    // 7. Validasi kesesuaian password input dengan password divisi
-    const inputPassTrim = inputPass.trim();
-    let passwordMatched = Boolean(expectedPassword && inputPassTrim === expectedPassword.trim());
+    // 7. Validasi KETAT kesesuaian kata sandi (Password Salah TIDAK BISA Masuk)
+    const inputPassTrim = (inputPass || "").trim();
+    const expectedPassTrim = (expectedPassword || "").trim();
 
-    // Toleransi variasi format resmi bawaan divisi jika password belum diganti
-    if (!passwordMatched && isDivisi && divisionObj) {
-      const rawPass = (divisionObj.password || "").trim();
-      const cleanNamaDiv = divisionObj.nama.replace(/^Divisi\s+/i, '').trim();
-      const formatResmi = `${cleanNamaDiv} Ekstrakurikuler Paskibra SMK Negeri 40 Jakarta`;
-      const formatGaratika = `${cleanNamaDiv}Garatika40`;
-      const formatIdGaratika = `${divisionObj.id}Garatika40`;
-
-      if (inputPassTrim === rawPass || inputPassTrim === formatResmi || inputPassTrim === formatGaratika || inputPassTrim === formatIdGaratika || inputPassTrim.startsWith(formatResmi.slice(0, 30))) {
-        passwordMatched = true;
-        if (typeof saveCustomPassword === 'function') {
-          saveCustomPassword(divisionObj.id, inputPassTrim);
-          saveCustomPassword(divisionObj.nama, inputPassTrim);
-          divisionObj.password = inputPassTrim;
-        }
-      }
-    }
-
-    if (!passwordMatched) {
+    if (!expectedPassTrim || !inputPassTrim || inputPassTrim !== expectedPassTrim) {
+      state.currentUser = null;
+      localStorage.removeItem("garatika_auth_user");
       showLoginAlert("Password Salah, Silahkan Coba Lagi.", "loginPassword");
       return;
     }
@@ -515,6 +502,11 @@ async function handleLogin(e) {
         text: ''
       });
     }
+  } catch (err) {
+    console.error("Kesalahan saat autentikasi login:", err);
+    state.currentUser = null;
+    localStorage.removeItem("garatika_auth_user");
+    showLoginAlert("Terjadi kendala saat memeriksa database akun. Silakan coba lagi.");
   } finally {
     if (btnSubmit) {
       btnSubmit.disabled = false;
