@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Custom Stylesheet (Clean Standard Web) -->
-  <link rel="stylesheet" href="css/style.css?v=20261103a">
+  <link rel="stylesheet" href="css/style.css?v=20261103b">
   
   <!-- Flatpickr CSS (Kalender Modern Paskibra - Khusus Hari Selasa & Mode Bulanan Sarpras) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -58,6 +58,39 @@
   </script>
 </head>
 <body class="user-not-logged-in">
+
+  <!-- ==========================================================================
+       APP OPENING / SPLASH SCREEN MODERN & ELEGAN (TRANSISI MENUJU LOGIN / UTAMA)
+       ========================================================================== -->
+  <div id="appSplashScreen" class="app-splash-screen" aria-hidden="true">
+    <div class="splash-backdrop-glow"></div>
+    <div class="splash-content">
+      <!-- Logo Kembar Berbingkai Halo Ring -->
+      <div class="splash-logo-wrapper">
+        <div class="splash-halo-ring"></div>
+        <div class="splash-logo-container">
+          <img src="logo-smk40.png" alt="Logo SMKN 40 Jakarta" class="splash-logo splash-logo-left">
+          <div class="splash-logo-divider"></div>
+          <img src="logo-paskibra.png" alt="Logo Paskibra Garatika" class="splash-logo splash-logo-right">
+        </div>
+      </div>
+
+      <!-- Teks Identitas Garatika Jayakarta -->
+      <div class="splash-brand-text">
+        <span class="splash-badge">Ekstrakurikuler Paskibra</span>
+        <h1 class="splash-title">GARATIKA JAYAKARTA</h1>
+        <p class="splash-subtitle">SMK NEGERI 40 JAKARTA</p>
+      </div>
+
+      <!-- Indikator Loading Modern -->
+      <div class="splash-loader-area">
+        <div class="splash-loader-bar">
+          <div class="splash-loader-fill"></div>
+        </div>
+        <span class="splash-loader-text">Memuat Sistem...</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        HEADER UTAMA (STICKY DI BAGIAN TERATAS)
@@ -1315,18 +1348,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
   <!-- Scripts Terstruktur & Modular Berbahasa Indonesia -->
-  <script src="js/data.js?v=20261103a"></script>
-  <script src="js/modul/penyimpanan.js?v=20261103a"></script>
-  <script src="js/modul/navigasi_tampilan.js?v=20261103a"></script>
-  <script src="js/modul/autentikasi.js?v=20261103a"></script>
-  <script src="js/modul/dashboard.js?v=20261103a"></script>
-  <script src="js/modul/manajemen_anggota.js?v=20261103a"></script>
-  <script src="js/modul/manajemen_divisi.js?v=20261103a"></script>
-  <script src="js/modul/manajemen_pengurus.js?v=20261103a"></script>
-  <script src="js/modul/laporan_divisi.js?v=20261103a"></script>
-  <script src="js/modul/cetak_kop_surat.js?v=20261103a"></script>
-  <script src="js/modul/integrasi_drive.js?v=20261103a"></script>
-  <script src="js/modul/aplikasi_utama.js?v=20261103a"></script>
+  <script src="js/data.js?v=20261103b"></script>
+  <script src="js/modul/penyimpanan.js?v=20261103b"></script>
+  <script src="js/modul/navigasi_tampilan.js?v=20261103b"></script>
+  <script src="js/modul/autentikasi.js?v=20261103b"></script>
+  <script src="js/modul/dashboard.js?v=20261103b"></script>
+  <script src="js/modul/manajemen_anggota.js?v=20261103b"></script>
+  <script src="js/modul/manajemen_divisi.js?v=20261103b"></script>
+  <script src="js/modul/manajemen_pengurus.js?v=20261103b"></script>
+  <script src="js/modul/laporan_divisi.js?v=20261103b"></script>
+  <script src="js/modul/cetak_kop_surat.js?v=20261103b"></script>
+  <script src="js/modul/integrasi_drive.js?v=20261103b"></script>
+  <script src="js/modul/aplikasi_utama.js?v=20261103b"></script>
 
   <!-- Registrasi PWA (Progressive Web App) Service Worker -->
   <script>

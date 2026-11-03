@@ -151,16 +151,64 @@ function initEventListeners() {
   sidebarBackdrop?.addEventListener("click", () => toggleSidebar(false));
 }
 
-// Fungsi Penutupan Splash Screen (Safe Cleanup jika elemen sudah dihilangkan)
+// Status & Kontrol Animasi Opening Menuju Halaman Login / Utama (~3.8 Detik)
+let splashDismissed = false;
+let splashTimer = null;
+
+// Tutup Layar Opening / Splash Screen dengan Efek Transisi Mulus ke Halaman Login / Utama
 function dismissSplashScreen() {
+  if (splashDismissed) return;
+  splashDismissed = true;
+  if (splashTimer) {
+    clearTimeout(splashTimer);
+    splashTimer = null;
+  }
   const splash = document.getElementById("appSplashScreen");
-  if (splash) {
-    if (typeof splash.remove === "function") {
-      splash.remove();
+  if (!splash) return;
+  splash.classList.add("splash-fade-out");
+  setTimeout(() => {
+    if (splash.style && typeof splash.style.setProperty === "function") {
+      splash.style.setProperty("display", "none", "important");
     } else if (splash.style) {
       splash.style.display = "none";
     }
+  }, 700);
+}
+
+// Jalankan Animasi Pembuka Menuju Halaman Login / Utama
+function startSplashScreenCooldown() {
+  if (splashTimer || splashDismissed) return;
+
+  const splash = document.getElementById("appSplashScreen");
+  if (!splash) return;
+
+  let isAuth = false;
+  try {
+    isAuth = Boolean(localStorage.getItem("garatika_auth_user"));
+  } catch(e) {}
+
+  const loaderText = splash.querySelector(".splash-loader-text");
+  if (loaderText) {
+    setTimeout(() => {
+      if (!splashDismissed) loaderText.textContent = "Menyiapkan Data & Laporan...";
+    }, 1600);
+    setTimeout(() => {
+      if (!splashDismissed) {
+        loaderText.textContent = isAuth ? "Menuju Halaman Utama..." : "Menuju Halaman Login...";
+      }
+    }, 3000);
   }
+
+  // Dukung tap untuk lewati setelah 1.5 detik jika pengguna ingin masuk lebih awal
+  setTimeout(() => {
+    if (!splashDismissed && splash) {
+      splash.addEventListener("click", () => dismissSplashScreen(), { once: true });
+    }
+  }, 1500);
+
+  splashTimer = setTimeout(() => {
+    dismissSplashScreen();
+  }, 3800);
 }
 
 // Inisialisasi Saat Dokumen Selesai Dimuat
@@ -172,6 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof initEventListeners === "function") initEventListeners();
   if (typeof initPasswordToggle === "function") initPasswordToggle();
 
+  // Mulai animasi pembuka menuju halaman login / utama
+  startSplashScreenCooldown();
+
   // Sinkronisasi data cloud (anggota, divisi, laporan) di latar belakang saat aplikasi dibuka / di-refresh
   if (typeof fetchDataFromGAS === "function" && state.gasWebhookUrl) {
     setTimeout(() => {
@@ -179,6 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1200);
   }
 });
+
+// Cadangan aktivasi animasi jika skrip dimuat saat dokumen sudah siap
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  startSplashScreenCooldown();
+}
 
 // Window Exports
 window.renderAll = renderAll;
