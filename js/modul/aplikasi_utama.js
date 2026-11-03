@@ -151,47 +151,16 @@ function initEventListeners() {
   sidebarBackdrop?.addEventListener("click", () => toggleSidebar(false));
 }
 
-// Status & Kontrol Cooldown Opening / Splash Screen (~4 Detik)
-let splashDismissed = false;
-let splashTimer = null;
-
-// Tutup Layar Opening / Splash Screen dengan Efek Transisi Mulus
+// Fungsi Penutupan Splash Screen (Safe Cleanup jika elemen sudah dihilangkan)
 function dismissSplashScreen() {
-  if (splashDismissed) return;
-  splashDismissed = true;
-  if (splashTimer) {
-    clearTimeout(splashTimer);
-    splashTimer = null;
-  }
   const splash = document.getElementById("appSplashScreen");
-  if (!splash) return;
-  splash.classList.add("splash-fade-out");
-  setTimeout(() => {
-    if (splash.style && typeof splash.style.setProperty === "function") {
-      splash.style.setProperty("display", "none", "important");
+  if (splash) {
+    if (typeof splash.remove === "function") {
+      splash.remove();
     } else if (splash.style) {
       splash.style.display = "none";
     }
-  }, 650);
-}
-
-// Jalankan Cooldown Opening Splash Screen Tepat ~4 Detik Sesuai Permintaan
-function startSplashScreenCooldown() {
-  if (splashTimer || splashDismissed) return;
-
-  const loaderText = document.querySelector(".splash-loader-text");
-  if (loaderText) {
-    setTimeout(() => {
-      if (!splashDismissed) loaderText.textContent = "Menyiapkan Data & Laporan...";
-    }, 1700);
-    setTimeout(() => {
-      if (!splashDismissed) loaderText.textContent = "Sistem Siap Digunakan";
-    }, 3300);
   }
-
-  splashTimer = setTimeout(() => {
-    dismissSplashScreen();
-  }, 4000);
 }
 
 // Inisialisasi Saat Dokumen Selesai Dimuat
@@ -203,9 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof initEventListeners === "function") initEventListeners();
   if (typeof initPasswordToggle === "function") initPasswordToggle();
 
-  // Mulai cooldown splash screen ~4 detik
-  startSplashScreenCooldown();
-
   // Sinkronisasi data cloud (anggota, divisi, laporan) di latar belakang saat aplikasi dibuka / di-refresh
   if (typeof fetchDataFromGAS === "function" && state.gasWebhookUrl) {
     setTimeout(() => {
@@ -213,11 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1200);
   }
 });
-
-// Cadangan aktivasi cooldown jika skrip dimuat saat dokumen sudah siap
-if (document.readyState === "complete" || document.readyState === "interactive") {
-  startSplashScreenCooldown();
-}
 
 // Window Exports
 window.renderAll = renderAll;

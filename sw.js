@@ -5,7 +5,7 @@
  * =========================================================================
  */
 
-const CACHE_NAME = 'garatika-pwa-v2026.4';
+const CACHE_NAME = 'garatika-pwa-v2026.5';
 
 const STATIC_ASSETS = [
   './',
